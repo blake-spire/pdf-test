@@ -1,0 +1,90 @@
+html {
+  font-size: 11px;
+}
+
+body * {
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border-spacing: 0;
+  border: 1px solid black;
+  text-align: left;
+  font-size: 1rem;
+}
+
+th {
+  font-size: 1.5rem;
+}
+
+p,
+label,
+th span {
+  margin: 0.25rem 1rem;
+  width: 100%;
+}
+
+.inline {
+  display: inline;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.no-margin {
+  margin: 0;
+}
+.margin-left {
+  margin-left: 2rem;
+}
+.margin-right {
+  margin-right: 2rem;
+}
+.margin-top {
+  margin-top: 1rem;
+}
+.margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.pad-left {
+  padding-left: 1rem;
+}
+.pad-right {
+  padding-right: 1rem;
+}
+
+.center {
+  text-align: center;
+}
+.blank-underline {
+  border-bottom: 1px solid black;
+  padding-left: 15rem;
+}
+
+ul {
+  padding-left: 2rem;
+}
+
+table ~ table tr:first-of-type td {
+  border-top: none;
+}
+.width-5 {
+  width: 5%;
+}
+.width-10 {
+  width: 10%;
+}
+.width-20 {
+  width: 20%;
+}
+.width-50 {
+  width: 50%;
+}

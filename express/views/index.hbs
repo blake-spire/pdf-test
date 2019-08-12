@@ -1,0 +1,245 @@
+<table>
+  <thead>
+    <tr>
+      <th colspan='2'><span class='bold'>CONSTRUCTION STORMWATER INSPECTION REPORT</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <label>{{ 0.input_label }}:</label>
+        <p>{{ 0.answer }}</p>
+      </td>
+      <td>
+        <label>{{ 1.input_label }}:</label>
+        <p>{{ 1.answer }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>{{ 2.input_label }}:</label>
+        <p>{{ 2.answer }}</p>
+      </td>
+      <td>
+        <label>{{ 3.input_label }}:</label>
+        <p>{{ 3.answer }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>{{ 4.input_label }}:</label>
+        <p>{{ 4.answer }}</p>
+      </td>
+      <td>
+        <label>{{ 5.input_label }}:</label>
+        <p>{{ 5.answer }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>{{ 6.input_label }}:</label>
+        <p>{{ 6.answer }}</p>
+      </td>
+      <td>
+        <label>{{ 7.input_label }}:</label>
+        <p>{{ 7.answer }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><label class='inline'>{{8.input_label}}</label>
+        <p class='inline'>Yes</p>
+        <p class='inline'>No</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{{!-- thirds --}}
+<table>
+  <tbody>
+    <tr>
+      <td><label>{{9.input_label}}</label>
+        <p>{{9.answer}}</p>
+      </td>
+      <td><label>{{10.input_label}}</label>
+        <p>{{10.answer}}</p>
+      </td>
+      <td><label>{{11.input_label}}</label>
+        <p>{{11.answer}}</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{{!-- halves --}}
+<table>
+  <tbody>
+    <tr>
+      <td class='width-50'>
+        <label>{{ 12.input_label }}:</label>
+        <p>{{ 12.answer }}</p>
+      </td>
+      <td class='width-50'>
+        <label>{{ 14.input_label }}:</label>
+        <p>{{ 14.answer }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label class='bold'>{{ 15.input_label }}:</label>
+        <div>
+          {{#each 15.options}}
+          <p class='inline'>{{name}}</p>
+          {{/each}}
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label class='inline'>{{ 16.input_label }}:</label>
+        <p class='inline'>{{ 16.answer }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label class='bold'>Type of Inspection</label>
+        <div class='margin-left'>
+          {{#each 17.options}}
+          <p class='no-margin margin-top'>{{name}}</p>
+          {{{description}}}
+
+          {{#if child_questions}}
+          <div>
+            {{#each child_questions}}
+            <p class='inline'>
+              <span>{{input_label}}</span>
+              <span class='blank-underline'>
+                {{input_answer}}
+              </span>
+            </p>
+            {{/each}}
+          </div>
+          {{/if}}
+
+          {{/each}}
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{{!-- SWMP TABLES --}}
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <label class='bold'>
+          SWMP Management
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td class='width-50'></td>
+      <td class="center width-5"><label class='bold'>Yes</label></td>
+      <td class="center width-5"><label class='bold'>No</label></td>
+      <td class="center width-5"><label class='bold'>N/A</label></td>
+      <td><label class='bold'>Comments</label></td>
+    </tr>
+    <tr>
+      <td class='width-50'>{{18.input_label}}
+        {{#if 18.description}}
+        <span>({{18.description}})</span>
+        {{/if}}
+      </td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td><label class='bold'>{{18.comment}}</label></td>
+    </tr>
+    <tr>
+      <td class='width-50'>{{19.input_label}}
+        {{#if 19.description}}
+        <span>({{19.description}})</span>
+        {{/if}}
+      </td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td><label class='bold'>{{19.comment}}</label></td>
+    </tr>
+    <tr>
+      <td class='width-50'>{{20.input_label}}
+        {{#if 20.description}}
+        <span>({{20.description}})</span>
+        {{/if}}
+      </td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td><label class='bold'>{{20.comment}}</label></td>
+    </tr>
+    <tr>
+      <td class='width-50'>{{21.input_label}}
+        {{#if 21.description}}
+        <span>({{21.description}})</span>
+        {{/if}}
+      </td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td><label class='bold'>{{21.comment}}</label></td>
+    </tr>
+    <tr>
+      <td class='width-50'>{{22.input_label}}
+        {{#if 22.description}}
+        <span>({{22.description}})</span>
+        {{/if}}
+      </td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td><label class='bold'>{{22.comment}}</label></td>
+    </tr>
+    <tr>
+      <td class='width-50'>{{23.input_label}}
+        {{#if 23.description}}
+        <span>({{23.description}})</span>
+        {{/if}}
+      </td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td><label class='bold'>{{23.comment}}</label></td>
+    </tr>
+    <tr>
+      <td class='width-50'>{{24.input_label}}
+        {{#if 24.description}}
+        <span>({{24.description}})</span>
+        {{/if}}
+      </td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td class="center width-5"><label class='bold'></label></td>
+      <td><label class='bold'>{{24.comment}}</label></td>
+    </tr>
+  </tbody>
+</table>
+{{!-- CONTROL MEASURES SECTION --}}
+<table>
+  <tbody>
+    <tr class='bold'>
+      <td colspan="8">
+        Control Measures at time of Inspection
+      </td>
+    </tr>
+    <tr>
+      <td class='width-20'></td>
+      <td class='width-10 pad-left pad-right center'>In SWMP Design</td>
+      <td class='width-10 pad-left pad-right center'>In Use</td>
+      <td class='width-10 pad-left pad-right center'>Not Needed at this time</td>
+      <td class='width-20'></td>
+      <td class='width-10 pad-left pad-right center'>In SWMP Design</td>
+      <td class='width-10 pad-left pad-right center'>In Use</td>
+      <td class='width-10 pad-left pad-right center'>Not Needed at this time</td>
+    </tr>
+  </tbody>
+</table>

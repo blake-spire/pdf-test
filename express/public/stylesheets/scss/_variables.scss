@@ -1,0 +1,76 @@
+// Document colors
+$rhino: #284260;
+$chambray: #385980;
+$baliHai: #7d92ac;
+$malibu: #7bb8ff;
+$bitterSweet: #ff7272;
+$mercury: #e9e9e9;
+$kashmir: #54708e;
+$bigStone: #1b2e43;
+$athensGray: #e5e8ec;
+$mantis: #8dc058;
+$buttercup: #f5a623;
+$body-bg: $rhino;
+$warning: #ff8888;
+$brookseyBorder: rgba(56, 89, 128, 0.29);
+$grayedBackground: rgba(0, 0, 0, 0.6);
+$white: #fff;
+
+$link-color: $malibu;
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+$font-family-base: "ProximaNovaBold";
+$font-family-bold: $font-family-base;
+$font-family-regular: "ProximaNovaRegular";
+$font-family-thin: "ProximaNovaThin";
+
+//buttons
+$primary: #7bb8ff;
+
+// breakpoints
+$breakpoints: (
+  "sm": (
+    min-width: 35.5em,
+  ),
+  "md": (
+    min-width: 48em,
+  ),
+  "lg": (
+    min-width: 64em,
+  ),
+  "xl": (
+    min-width: 80em,
+  ),
+) !default;
+
+// border, shadow
+$border-radius: 4px;
+$border-radius-sm: 2px;
+$border: 1px solid $mercury;
+
+$box-shadow-sm: 0 0 2px 0 rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.12),
+  0 1px 3px 0 rgba(0, 0, 0, 0.2); // 0px 1px 3px  rgba(0,0,0,0.2);
+$box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+$box-shadow-lg: 2px 2px 30px rgba(0, 0, 0, 0.37);
+$box-shadow-inset: inset 5px 1px 10px 0 #b4b5b8;
+$box-shadow-menu: 0 10px 20px 0 rgba(56, 89, 128, 0.34);
+
+$curve: cubic-bezier(0.65, 0, 0.45, 1);
+
+%text-overflow {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+// pure css breakpoints
+$breakpoint-sm: 568px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+%override-autofill {
+  background-color: $chambray;
+  color: $white;
+  -webkit-box-shadow: 0 0 0 1000px $chambray inset;
+  -webkit-text-fill-color: $white;
+}

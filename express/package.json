@@ -1,0 +1,22 @@
+{
+  "name": "pdf-test-2",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "PORT=1234 nodemon ./bin/www",
+    "sass:build": "sass --no-source-map ./public/stylesheets/scss:./public/stylesheets",
+    "sass:watch": "sass --watch ./public/stylesheets/scss:./public/stylesheets"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "sass": "^1.22.9"
+  }
+}

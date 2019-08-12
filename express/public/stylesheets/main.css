@@ -1,0 +1,194 @@
+.inspection-questions textarea, .inspection-questions input[type=text],
+.inspection-questions select,
+.inspection-questions .react-datepicker__input-container {
+  color: #385980;
+  font-size: 0.9rem;
+}
+.inspection-questions .inspection-question {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+.inspection-questions input[type=text],
+.inspection-questions select,
+.inspection-questions .react-datepicker__input-container {
+  height: 44px;
+}
+.inspection-questions input[type=radio],
+.inspection-questions input[type=checkbox] {
+  width: auto;
+  margin: 0 0.5em;
+}
+.inspection-questions input[type=radio] ~ .description,
+.inspection-questions input[type=checkbox] ~ .description {
+  margin-bottom: 0;
+}
+.inspection-questions .react-datepicker__time-container li {
+  white-space: nowrap;
+}
+.inspection-questions .react-datepicker__input-container,
+.inspection-questions textarea {
+  width: 100%;
+}
+.inspection-questions .inspection-form-section {
+  margin-top: 1.5rem;
+}
+.inspection-questions .input-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+.inspection-questions .input-row label:first-of-type {
+  flex-basis: 100%;
+}
+.inspection-questions .no-padding-top {
+  padding-top: 0;
+}
+.inspection-questions .no-padding-bottom {
+  padding-bottom: 0;
+}
+.inspection-questions .radio-label,
+.inspection-questions .checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: row wrap;
+}
+.inspection-questions .radio-label.checkbox-label-single,
+.inspection-questions .checkbox-label.checkbox-label-single {
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.inspection-questions .radio-label .description,
+.inspection-questions .checkbox-label .description {
+  padding-left: 2em;
+  width: 100%;
+}
+.inspection-questions .radio-label .control-wrapper,
+.inspection-questions .checkbox-label .control-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+.inspection-questions label ~ p.description {
+  margin: 0 0 0.2em 0;
+  font-size: 0.85rem;
+}
+.inspection-questions .description {
+  margin-top: 0;
+  color: #7d92ac;
+}
+.inspection-questions .description ul {
+  margin: 0.5em;
+}
+.inspection-questions textarea {
+  resize: none;
+}
+.inspection-questions .center .label {
+  text-align: left;
+}
+.inspection-questions .full-width label {
+  width: 100%;
+}
+.inspection-questions .label-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+.inspection-questions .child-questions-wrapper {
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+.inspection-questions .comment {
+  margin: 0 1em;
+  font-size: 1.3rem;
+}
+.inspection-questions .justify-center {
+  justify-content: center;
+}
+.inspection-questions .text-left {
+  text-align: left;
+}
+.inspection-questions .text-left span {
+  text-align: left;
+}
+.inspection-questions table.inspection-form-section {
+  width: 100%;
+}
+.inspection-questions table.inspection-form-section .label {
+  width: 50%;
+}
+.inspection-questions table.inspection-form-section .label-wide {
+  width: 70%;
+}
+.inspection-questions table.inspection-form-section .label-small td {
+  width: 100%;
+}
+.inspection-questions table.inspection-form-section .label-small .label {
+  width: 33%;
+}
+.inspection-questions table.inspection-form-section .child label {
+  padding-left: 1em;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.inspection-questions table.inspection-form-section .child label .dash {
+  margin: 0 0.5rem 0 0;
+}
+.inspection-questions table.inspection-form-section .child label ~ .description {
+  padding-left: 2em;
+}
+.inspection-questions table.inspection-form-section th {
+  font-family: "ProximaNovaRegular";
+  padding: 0 0.75em;
+  text-align: center;
+}
+.inspection-questions table.inspection-form-section th.label {
+  text-align: left;
+}
+.inspection-questions table.inspection-form-section th h3 {
+  margin: 0;
+}
+.inspection-questions table.inspection-form-section th h4 {
+  color: #7d92ac;
+}
+.inspection-questions table.inspection-form-section td {
+  border-top: 1px solid rgba(56, 89, 128, 0.29);
+  border-bottom: 1px solid rgba(56, 89, 128, 0.29);
+  padding: 0 0.25em;
+  text-align: center;
+}
+.inspection-questions table.inspection-form-section td.label {
+  text-align: left;
+}
+.inspection-questions table.inspection-form-section td:first-of-type, .inspection-questions table.inspection-form-section td:last-of-type {
+  border-right: 1px solid rgba(56, 89, 128, 0.29);
+}
+.inspection-questions table.inspection-form-section td.boolean {
+  width: 5rem;
+}
+.inspection-questions table.inspection-form-section td.boolean .radio-label {
+  width: 100%;
+}
+.inspection-questions table.inspection-form-section td.has-comments .label-wrapper {
+  justify-content: space-between;
+  width: 100%;
+}
+.inspection-questions table.inspection-form-section td.comment-only {
+  width: 1em;
+  border-right: none;
+}
+.inspection-questions table.inspection-form-section td .radio-label,
+.inspection-questions table.inspection-form-section td .checkbox-label {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.inspection-questions table.inspection-form-section textarea,
+.inspection-questions table.inspection-form-section input[type=text],
+.inspection-questions table.inspection-form-section .react-datepicker__input-container {
+  margin: 0.5em 0;
+}
+.inspection-questions table.inspection-form-section .react-datepicker__input-container input[type=text] {
+  margin: 0;
+}
+
+/*# sourceMappingURL=main.css.map */
