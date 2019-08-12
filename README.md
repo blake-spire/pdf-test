@@ -1,4 +1,4 @@
-# BASIC EXPRESS APP
+# PDF TESTING PLAYGROUND
 
 Using this to test out styles and whatnot passed to our SSR template and the dynamic-html-pdf library. It's a bootstrapped Express app or a CRA app
 

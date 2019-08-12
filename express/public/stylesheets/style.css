@@ -30,8 +30,15 @@ th span {
   width: 100%;
 }
 
+.td-pad {
+  padding: 0.25rem 1rem;
+}
+
 .inline {
   display: inline;
+}
+.inline-table {
+  float: left;
 }
 
 .bold {
@@ -73,9 +80,22 @@ ul {
   padding-left: 2rem;
 }
 
+/* resolve double borders */
 table ~ table tr:first-of-type td {
   border-top: none;
 }
+.inline-table ~ .inline-table tr td:first-of-type {
+  border-left: none;
+}
+
+.font-small {
+  font-size: 0.9rem;
+}
+
+.double-height {
+  height: 3rem;
+}
+
 .width-5 {
   width: 5%;
 }
@@ -84,6 +104,9 @@ table ~ table tr:first-of-type td {
 }
 .width-20 {
   width: 20%;
+}
+.width-40 {
+  width: 40%;
 }
 .width-50 {
   width: 50%;

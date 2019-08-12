@@ -7,41 +7,41 @@
   <tbody>
     <tr>
       <td>
-        <label>{{ 0.input_label }}:</label>
+        <label>{{ 0.input_label }}{{#if 0.description}} ({{0.description}}){{/if}}:</label>
         <p>{{ 0.answer }}</p>
       </td>
       <td>
-        <label>{{ 1.input_label }}:</label>
+        <label>{{ 1.input_label }}{{#if 1.description}} ({{1.description}}){{/if}}:</label>
         <p>{{ 1.answer }}</p>
       </td>
     </tr>
     <tr>
       <td>
-        <label>{{ 2.input_label }}:</label>
+        <label>{{ 2.input_label }}{{#if 2.description}} ({{2.description}}){{/if}}:</label>
         <p>{{ 2.answer }}</p>
       </td>
       <td>
-        <label>{{ 3.input_label }}:</label>
+        <label>{{ 3.input_label }}{{#if 3.description}} ({{3.description}}){{/if}}:</label>
         <p>{{ 3.answer }}</p>
       </td>
     </tr>
     <tr>
       <td>
-        <label>{{ 4.input_label }}:</label>
+        <label>{{ 4.input_label }}{{#if 4.description}} ({{4.description}}){{/if}}:</label>
         <p>{{ 4.answer }}</p>
       </td>
       <td>
-        <label>{{ 5.input_label }}:</label>
+        <label>{{ 5.input_label }}{{#if 5.description}} ({{5.description}}){{/if}}:</label>
         <p>{{ 5.answer }}</p>
       </td>
     </tr>
     <tr>
       <td>
-        <label>{{ 6.input_label }}:</label>
+        <label>{{ 6.input_label }}{{#if 6.description}} ({{6.description}}){{/if}}:</label>
         <p>{{ 6.answer }}</p>
       </td>
       <td>
-        <label>{{ 7.input_label }}:</label>
+        <label>{{ 7.input_label }}{{#if 7.description}} ({{7.description}}){{/if}}:</label>
         <p>{{ 7.answer }}</p>
       </td>
     </tr>
@@ -145,7 +145,7 @@
       <td><label class='bold'>Comments</label></td>
     </tr>
     <tr>
-      <td class='width-50'>{{18.input_label}}
+      <td class='width-50 td-pad'>{{18.input_label}}
         {{#if 18.description}}
         <span>({{18.description}})</span>
         {{/if}}
@@ -156,7 +156,7 @@
       <td><label class='bold'>{{18.comment}}</label></td>
     </tr>
     <tr>
-      <td class='width-50'>{{19.input_label}}
+      <td class='width-50 td-pad'>{{19.input_label}}
         {{#if 19.description}}
         <span>({{19.description}})</span>
         {{/if}}
@@ -167,7 +167,7 @@
       <td><label class='bold'>{{19.comment}}</label></td>
     </tr>
     <tr>
-      <td class='width-50'>{{20.input_label}}
+      <td class='width-50 td-pad'>{{20.input_label}}
         {{#if 20.description}}
         <span>({{20.description}})</span>
         {{/if}}
@@ -178,7 +178,7 @@
       <td><label class='bold'>{{20.comment}}</label></td>
     </tr>
     <tr>
-      <td class='width-50'>{{21.input_label}}
+      <td class='width-50 td-pad'>{{21.input_label}}
         {{#if 21.description}}
         <span>({{21.description}})</span>
         {{/if}}
@@ -189,7 +189,7 @@
       <td><label class='bold'>{{21.comment}}</label></td>
     </tr>
     <tr>
-      <td class='width-50'>{{22.input_label}}
+      <td class='width-50 td-pad'>{{22.input_label}}
         {{#if 22.description}}
         <span>({{22.description}})</span>
         {{/if}}
@@ -200,7 +200,7 @@
       <td><label class='bold'>{{22.comment}}</label></td>
     </tr>
     <tr>
-      <td class='width-50'>{{23.input_label}}
+      <td class='width-50 td-pad'>{{23.input_label}}
         {{#if 23.description}}
         <span>({{23.description}})</span>
         {{/if}}
@@ -211,7 +211,7 @@
       <td><label class='bold'>{{23.comment}}</label></td>
     </tr>
     <tr>
-      <td class='width-50'>{{24.input_label}}
+      <td class='width-50 td-pad'>{{24.input_label}}
         {{#if 24.description}}
         <span>({{24.description}})</span>
         {{/if}}
@@ -221,25 +221,270 @@
       <td class="center width-5"><label class='bold'></label></td>
       <td><label class='bold'>{{24.comment}}</label></td>
     </tr>
-  </tbody>
-</table>
-{{!-- CONTROL MEASURES SECTION --}}
-<table>
-  <tbody>
+
+    {{!-- CM header --}}
     <tr class='bold'>
-      <td colspan="8">
+      <td colspan="5" class='td-pad'>
         Control Measures at time of Inspection
       </td>
     </tr>
+  </tbody>
+</table>
+
+{{!-- CONTROL MEASURES SECTION --}}
+{{!-- EROSION --}}
+<table class='width-50 inline-table'>
+  <tbody>
     <tr>
-      <td class='width-20'></td>
-      <td class='width-10 pad-left pad-right center'>In SWMP Design</td>
-      <td class='width-10 pad-left pad-right center'>In Use</td>
-      <td class='width-10 pad-left pad-right center'>Not Needed at this time</td>
-      <td class='width-20'></td>
-      <td class='width-10 pad-left pad-right center'>In SWMP Design</td>
-      <td class='width-10 pad-left pad-right center'>In Use</td>
-      <td class='width-10 pad-left pad-right center'>Not Needed at this time</td>
+      <td class='width-40'></td>
+      <td class='width-20 pad-left pad-right center'>In SWMP Design</td>
+      <td class='width-20 pad-left pad-right center'>In Use</td>
+      <td class='width-20 pad-left pad-right center'>Not Needed at this time</td>
+    </tr>
+    <tr>
+      <td colspan='4' class="bold td-pad">
+        Erosion Control Measures
+      </td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{25.input_label}}{{#if 25.description}}<span
+          class='font-small'>({{25.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{26.input_label}}{{#if 26.description}}<span
+          class='font-small'>({{26.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{27.input_label}}{{#if 27.description}}<span
+          class='font-small'>({{27.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{28.input_label}}{{#if 28.description}}<span
+          class='font-small'>({{28.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{29.input_label}}{{#if 29.description}}<span
+          class='font-small'>({{29.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{30.input_label}}{{#if 30.description}}<span
+          class='font-small'>({{30.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{31.input_label}}{{#if 31.description}}<span
+          class='font-small'>({{31.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{32.input_label}}{{#if 32.description}}<span
+          class='font-small'>({{32.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{33.input_label}}{{#if 33.description}}<span
+          class='font-small'>({{33.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{34.input_label}}{{#if 34.description}}<span
+          class='font-small'>({{34.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>Other<span class='font-small'>(Specify)</span></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+  </tbody>
+</table>
+
+{{!-- Sediment Control Measures --}}
+<table class='width-50 inline-table'>
+  <tbody>
+    <tr>
+      <td class='width-40'></td>
+      <td class='width-20 pad-left pad-right center'>In SWMP Design</td>
+      <td class='width-20 pad-left pad-right center'>In Use</td>
+      <td class='width-20 pad-left pad-right center'>Not Needed at this time</td>
+    </tr>
+    <tr>
+      <td colspan='4' class="bold td-pad">
+        Sediment Control Measures
+      </td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{35.input_label}}{{#if 35.description}}<span
+          class='font-small'>({{35.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{36.input_label}}{{#if 36.description}}<span
+          class='font-small'>({{36.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{37.input_label}}{{#if 37.description}}<span
+          class='font-small'>({{37.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{38.input_label}}{{#if 38.description}}<span
+          class='font-small'>({{38.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{39.input_label}}{{#if 39.description}}<span
+          class='font-small'>({{39.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{40.input_label}}{{#if 40.description}}<span
+          class='font-small'>({{40.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{41.input_label}}{{#if 41.description}}<span
+          class='font-small'>({{41.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{42.input_label}}{{#if 42.description}}<span
+          class='font-small'>({{42.description}})</span>{{/if}}
+      </td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{43.input_label}}{{#if 43.description}}<span
+          class='font-small'>({{43.description}})</span>{{/if}}
+      </td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{44.input_label}}{{#if 44.description}}<span
+          class='font-small'>({{44.description}})</span>{{/if}}
+      </td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{45.input_label}}{{#if 45.description}}<span
+          class='font-small'>({{45.description}})</span>{{/if}}
+      </td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+  </tbody>
+</table>
+
+{{!-- Control Measures for Special Conditions --}}
+<table class='width-50 inline-table'>
+  <tbody>
+    <tr>
+      <td class='width-40'></td>
+      <td class='width-20 pad-left pad-right center'>In SWMP Design</td>
+      <td class='width-20 pad-left pad-right center'>In Use</td>
+      <td class='width-20 pad-left pad-right center'>Not Needed at this time</td>
+    </tr>
+    <tr>
+      <td colspan='4' class="bold td-pad">
+        Control Measures for Special Conditions
+      </td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{46.input_label}}{{#if 46.description}}<span
+          class='font-small'>({{46.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{47.input_label}}{{#if 47.description}}<span
+          class='font-small'>({{47.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{48.input_label}}{{#if 48.description}}<span
+          class='font-small'>({{48.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{49.input_label}}{{#if 49.description}}<span
+          class='font-small'>({{49.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{50.input_label}}{{#if 50.description}}<span
+          class='font-small'>({{50.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{51.input_label}}{{#if 51.description}}<span
+          class='font-small'>({{51.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+    </tr>
+    <tr>
+      <td class='width-40 double-height td-pad'>{{52.input_label}}{{#if 52.description}}<span
+          class='font-small'>({{52.description}})</span>{{/if}}</td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
+      <td class='width-20 pad-left pad-right center'></td>
     </tr>
   </tbody>
 </table>
