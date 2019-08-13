@@ -1,0 +1,192 @@
+html {
+  font-size: 11px;
+}
+
+body * {
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border-spacing: 0;
+  border: 1px solid black;
+  text-align: left;
+  font-size: 1rem;
+  padding: 0.25rem 1rem;
+}
+
+th,
+h3 {
+  font-size: 1.5rem;
+}
+
+p,
+label,
+th span {
+  margin: 0;
+  width: 100%;
+}
+.question-margin {
+  margin: 0.25rem 1rem;
+}
+
+.td-pad {
+  padding: 0.25rem 1rem;
+}
+
+.inline {
+  display: inline;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+/* spacing */
+.no-margin {
+  margin: 0;
+}
+.margin-left {
+  margin-left: 2rem;
+}
+.margin-right {
+  margin-right: 2rem;
+}
+.margin-top {
+  margin-top: 1rem;
+}
+.margin-top-lg {
+  margin-top: 7rem;
+}
+.margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.pad-left {
+  padding-left: 1rem;
+}
+.pad-right {
+  padding-right: 1rem;
+}
+.pad-bottom {
+  padding-bottom: 2rem;
+}
+
+.space-left {
+  padding-left: 0.25rem;
+}
+.space-right {
+  padding-right: 0.25rem;
+}
+
+/* resolve double borders */
+table ~ table tr:first-of-type td,
+section tr:first-of-type td {
+  border-top: none;
+}
+
+table ~ table tr:first-of-type td.full-border,
+.inline-table ~ .inline-table tr td:first-of-type.full-border,
+section tr td:first-of-type.full-border,
+table.full-border tr:first-of-type td {
+  border: 1px solid black;
+}
+table ~ table tr:first-of-type td.left-border,
+.inline-table ~ .inline-table tr td:first-of-type.left-border {
+  border-left: 1px solid black;
+}
+
+.font-small {
+  font-size: 0.9rem;
+}
+.font-large {
+  font-size: 1.3rem;
+}
+
+.double-height {
+  height: 5.9rem;
+}
+.triple-height {
+  height: 7rem;
+}
+td.blank {
+  height: 6.15rem; /* +0.25rem .double-height */
+}
+
+h3 {
+  margin: 1rem 0;
+}
+.inline-flex {
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+.inline-table {
+  display: inline-block;
+  overflow: hidden;
+}
+.align-top {
+  vertical-align: top;
+}
+
+.center {
+  text-align: center;
+}
+
+.blank-underline {
+  border-bottom: 1px solid black;
+  padding-left: 1rem;
+  padding-right: 5rem;
+}
+
+ul {
+  padding-left: 2rem;
+}
+
+.bg-grey {
+  background-color: #d8d8d8;
+}
+
+/* circled answers */
+.answer {
+  border: 1px solid black;
+  border-radius: 90px;
+  padding: 0.5rem;
+}
+
+/* custom inputs */
+.checkbox {
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 1px solid black;
+  display: inline-block;
+}
+.checkbox.checked {
+  background-color: #666;
+  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyNiIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIyLjAyOTY4IC00MC4wOTAzIDI2IDIwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48IS0tR2VuZXJhdGVkIGJ5IElKU1ZHIChodHRwczovL2dpdGh1Yi5jb20vaWNvbmphci9JSlNWRyktLT48cGF0aCBkPSJNMjcuOTc0MywtMzYuMTI3MmMwLDAuNDQ2NDI4IC0wLjE1NjI1LDAuODI1ODkzIC0wLjQ2ODc1LDEuMTM4MzlsLTEyLjEyMDUsMTIuMTIwNWwtMi4yNzY3OSwyLjI3Njc5Yy0wLjMxMjUsMC4zMTI1IC0wLjY5MTk2NCwwLjQ2ODc1IC0xLjEzODM5LDAuNDY4NzVjLTAuNDQ2NDI4LDAgLTAuODI1ODkzLC0wLjE1NjI1IC0xLjEzODM5LC0wLjQ2ODc1bC0yLjI3Njc5LC0yLjI3Njc5bC02LjA2MDI3LC02LjA2MDI3Yy0wLjMxMjUsLTAuMzEyNSAtMC40Njg3NSwtMC42OTE5NjUgLTAuNDY4NzUsLTEuMTM4MzljMCwtMC40NDY0MjkgMC4xNTYyNSwtMC44MjU4OTMgMC40Njg3NSwtMS4xMzgzOWwyLjI3Njc5LC0yLjI3Njc5YzAuMzEyNSwtMC4zMTI1IDAuNjkxOTY1LC0wLjQ2ODc1IDEuMTM4MzksLTAuNDY4NzVjMC40NDY0MjksMCAwLjgyNTg5MywwLjE1NjI1IDEuMTM4MzksMC40Njg3NWw0LjkyMTg4LDQuOTM4NjJsMTAuOTgyMSwtMTAuOTk4OWMwLjMxMjUsLTAuMzEyNSAwLjY5MTk2NCwtMC40Njg3NSAxLjEzODM5LC0wLjQ2ODc1YzAuNDQ2NDI4LDAgMC44MjU4OTMsMC4xNTYyNSAxLjEzODM5LDAuNDY4NzVsMi4yNzY3OCwyLjI3Njc5YzAuMzEyNSwwLjMxMjUgMC40Njg3NSwwLjY5MTk2NCAwLjQ2ODc1LDEuMTM4MzlaIiB0cmFuc2Zvcm09InNjYWxlKDEuMDAxOTgpIiBmaWxsPSIjZmZmIj48L3BhdGg+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.6rem;
+}
+
+/* widths */
+.width-5 {
+  width: 5%;
+}
+.width-10 {
+  width: 10%;
+}
+.width-20 {
+  width: 20%;
+}
+.width-40 {
+  width: 40%;
+}
+.width-50 {
+  width: 50%;
+}

@@ -1,0 +1,560 @@
+import React, { Fragment, Component } from "react";
+import { array } from "prop-types";
+import classnames from "classnames";
+import moment from "moment";
+
+// return empty string if no date
+moment.updateLocale(moment.locale(), { invalidDate: "" });
+
+class XcelForm extends Component {
+  static propTypes = {
+    questions: array.isRequired,
+  };
+
+  constructor(props) {
+    super(props);
+    this.dateFormat = "MM/D/YYYY";
+    this.timeFormat = "h:mm A";
+  }
+
+  renderRow = (i, cellCount, dateIndexes = [], timeIndexes = []) => {
+    return (
+      <tr key={i}>
+        {Array.from({ length: cellCount }, (_, i) => i).map(ii => {
+          const index = i + ii;
+          const isDate = dateIndexes.indexOf(ii) > -1;
+          const isTime = timeIndexes.indexOf(ii) > -1;
+          const question = this.props.questions[index];
+
+          return (
+            <td key={`question-${i}-cell-${ii}`}>
+              <label>
+                <span className="space-right">{index + 1}.</span>
+                {question.input_label}:
+              </label>
+              <p>
+                {isDate
+                  ? moment(question.answer).format(this.dateFormat)
+                  : isTime
+                  ? moment(question.answer).format(this.timeFormat)
+                  : question.answer}
+              </p>
+            </td>
+          );
+        })}
+      </tr>
+    );
+  };
+
+  renderYesNo = i => {
+    const question = this.props.questions[i];
+
+    return (
+      <Fragment>
+        <p
+          className={classnames(
+            "inline",
+            question.answer === "1" ? "answer" : ""
+          )}
+        >
+          Yes
+        </p>
+        <p
+          className={classnames(
+            "inline",
+            question.answer === "2" ? "answer" : ""
+          )}
+        >
+          No
+        </p>
+      </Fragment>
+    );
+  };
+
+  renderFullWidthRowInline = ({ i, includeYesNo }) => {
+    const question = this.props.questions[i];
+
+    return (
+      <tr key={i}>
+        <td colSpan="2">
+          <label className="inline">
+            <span className="space-right">{i + 1}.</span>
+            {question.input_label}:
+          </label>
+
+          {includeYesNo ? (
+            this.renderYesNo(i)
+          ) : (
+            <p className="inline">{question.answer}</p>
+          )}
+        </td>
+      </tr>
+    );
+  };
+
+  renderFullWidthRow = ({
+    i,
+    labelClass,
+    optionClass,
+    optionWrapperClass,
+    labelName,
+    checkbox,
+  }) => {
+    const question = this.props.questions[i];
+    // get answer
+    let answer, isArray;
+    if (typeof JSON.parse(question.answer) === "object") {
+      isArray = true;
+      answer = JSON.parse(question.answer);
+    } else {
+      isArray = false;
+      answer = question.answer;
+    }
+
+    return (
+      <tr key={i}>
+        <td colSpan="2">
+          <label className={labelClass}>
+            <span className="space-right">{i + 1}.</span>
+            {labelName || question.input_label}
+          </label>
+
+          {question.options.length ? (
+            <div className={optionWrapperClass}>
+              {question.options.map((option, ii) => {
+                const isAnswer = isArray
+                  ? answer[ii] === true
+                  : answer === ii + 14 + "";
+
+                return (
+                  <Fragment key={option.name}>
+                    <p
+                      className={classnames(
+                        optionClass,
+                        isAnswer && !isArray ? "answer" : ""
+                      )}
+                    >
+                      {checkbox && (
+                        <span
+                          className={classnames(
+                            "checkbox",
+                            isAnswer && isArray ? "checked" : ""
+                          )}
+                        />
+                      )}
+                      <span className="space-left">{option.name}</span>
+                    </p>
+                    {option.description && (
+                      <span
+                        dangerouslySetInnerHTML={{ __html: option.description }}
+                      />
+                    )}
+
+                    {option.child_questions.length > 0 ? (
+                      <div>
+                        {option.child_questions.map((childQuestion, iii) => (
+                          <p
+                            className="no-margin inline"
+                            key={childQuestion.input_label}
+                          >
+                            <span>{childQuestion.input_label}</span>
+                            <span className="blank-underline">
+                              {[0, 1].indexOf(iii) > -1
+                                ? moment(childQuestion.answer).format(
+                                    this.dateFormat
+                                  )
+                                : childQuestion.answer}
+                            </span>
+                          </p>
+                        ))}
+                      </div>
+                    ) : null}
+                  </Fragment>
+                );
+              })}
+            </div>
+          ) : null}
+        </td>
+      </tr>
+    );
+  };
+
+  renderSWMPRow = i => {
+    const question = this.props.questions[i];
+
+    return (
+      <tr key={i}>
+        <td className="width-50 td-pad">
+          <span className="space-right">{i + 1}.</span>
+          {question.input_label}
+          {question.description && (
+            <span className="font-small space-left">
+              ({question.description})
+            </span>
+          )}
+        </td>
+        <td className="center width-5">
+          <label className="bold">{question.answer === "1" ? "X" : ""}</label>
+        </td>
+        <td className="center width-5">
+          <label className="bold">{question.answer === "2" ? "X" : ""}</label>
+        </td>
+        <td className="center width-5">
+          <label className="bold">{question.answer === "3" ? "X" : ""}</label>
+        </td>
+        <td>
+          <label className="bold">{question.comment}</label>
+        </td>
+      </tr>
+    );
+  };
+
+  renderCMHeader = (title, fullBorder, includeSubGrid) => {
+    return (
+      <Fragment>
+        {includeSubGrid ? (
+          <tr>
+            <td
+              className={classnames(
+                "width-40",
+                fullBorder ? "left-border" : ""
+              )}
+            />
+            <td className="width-20 pad-left pad-right center">
+              In SWMP Design
+            </td>
+            <td className="width-20 pad-left pad-right center">In Use</td>
+            <td className="width-20 pad-left pad-right center">
+              Not Needed at this time
+            </td>
+          </tr>
+        ) : null}
+
+        <tr>
+          <td
+            colSpan="4"
+            className={classnames(
+              "bold td-pad double-height",
+              fullBorder ? "left-border" : ""
+            )}
+          >
+            {title}
+          </td>
+        </tr>
+      </Fragment>
+    );
+  };
+
+  renderCMRow = (i, blankCount, fullBorder) => {
+    const question = this.props.questions[i];
+
+    return Array.from({ length: blankCount ? blankCount : 1 }, (_, index) => ({
+      index,
+      isBlank: blankCount ? true : false,
+    })).map(item => (
+      <tr key={item.isBlank ? `blank-${item.index}` : i}>
+        {item.isBlank ? (
+          <td
+            colSpan="4"
+            className={classnames(
+              "double-height blank",
+              fullBorder ? "full-border" : ""
+            )}
+          />
+        ) : (
+          <Fragment>
+            <td
+              className={classnames(
+                "width-40 double-height td-pad",
+                fullBorder ? "full-border" : ""
+              )}
+            >
+              <span className="space-right">{i + 1}.</span>
+              {question.input_label}
+
+              {question.description ? (
+                <span className="font-small space-left">
+                  {/* add colon for other question */}
+                  {question.input_label === "Other"
+                    ? `(${question.description}):`
+                    : `(${question.description})`}
+                </span>
+              ) : null}
+            </td>
+
+            {["30", "31", "32"].map(answerValue => (
+              <td
+                key={`td-${answerValue}`}
+                className={classnames(
+                  "width-20 pad-left pad-right center",
+                  fullBorder ? "full-border" : ""
+                )}
+              >
+                {question.answer === answerValue ? "X" : ""}
+              </td>
+            ))}
+          </Fragment>
+        )}
+      </tr>
+    ));
+  };
+
+  renderAssessmentRow = i => {
+    const question = this.props.questions[i];
+
+    return (
+      <tr key={i}>
+        {JSON.parse(question.answer).map((answer, ii) => {
+          return (
+            <td key={`${i}-${ii}`}>
+              {ii === 0 ? moment(answer).format(this.dateFormat) : answer}
+            </td>
+          );
+        })}
+        <td>{question.comment}</td>
+      </tr>
+    );
+  };
+
+  renderLineQuestion = i => {
+    const question = this.props.questions[i];
+
+    return (
+      <div key={i} className="margin-bottom">
+        <p>
+          <span className="space-right">{i + 1}.</span>
+          {question.input_label}
+        </p>
+        <div className="margin-left">{this.renderYesNo(i)}</div>
+        {question.description && (
+          <p className="margin-left">{question.description}</p>
+        )}
+      </div>
+    );
+  };
+
+  render() {
+    const { questions } = this.props;
+
+    return (
+      <Fragment>
+        <table>
+          <thead>
+            <tr>
+              <th colSpan="2">
+                <span className="bold">
+                  CONSTRUCTION STORMWATER INSPECTION REPORT
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {questions.map((_, i) => {
+              if (i <= 7 && i % 2 === 0) return this.renderRow(i, 2);
+              else if (i === 8)
+                return this.renderFullWidthRowInline({
+                  i,
+                  includeYesNo: true,
+                });
+              else return null;
+            })}
+          </tbody>
+        </table>
+
+        {/* thirds */}
+        <table>
+          <tbody>
+            {questions.map((_, i) => {
+              if (i === 9) return this.renderRow(i, 3, [0]);
+              else return null;
+            })}
+          </tbody>
+        </table>
+
+        {/* halves */}
+        <table>
+          <tbody>
+            {questions.map((_, i) => {
+              if (i === 12) return this.renderRow(i, 2, [], [0, 1]);
+              else if (i === 14) return this.renderFullWidthRowInline({ i });
+              else if (i === 15)
+                return this.renderFullWidthRow({
+                  i,
+                  optionClass: "inline",
+                  labelClass: "bold",
+                });
+              else if (i === 16) return this.renderFullWidthRowInline({ i });
+              else if (i === 17)
+                return this.renderFullWidthRow({
+                  i,
+                  labelClass: "bold",
+                  optionClass: "no-margin margin-top",
+                  optionWrapperClass: "question-margin",
+                  labelName: "Type of Inspection",
+                  checkbox: true,
+                });
+              else return null;
+            })}
+          </tbody>
+        </table>
+
+        {/* SWMP */}
+        <table>
+          <tbody>
+            <tr>
+              <td colSpan="5">
+                <label className="bold">SWMP Management</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td className="width-50" />
+              <td className="center width-5">
+                <label className="bold">Yes</label>
+              </td>
+              <td className="center width-5">
+                <label className="bold">No</label>
+              </td>
+              <td className="center width-5">
+                <label className="bold">N/A</label>
+              </td>
+              <td>
+                <label className="bold">Comments</label>
+              </td>
+            </tr>
+
+            {questions.map((_, i) => {
+              if (i >= 18 && i <= 24) return this.renderSWMPRow(i);
+              else return null;
+            })}
+
+            <tr className="bold">
+              <td colSpan="5" className="td-pad">
+                Control Measures at time of Inspection
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        {/* CONTROL MEASURES  */}
+        <section>
+          <table className="width-50 inline-table align-top">
+            <tbody>
+              {this.renderCMHeader("Erosion Control Measures", null, true)}
+              {questions.map((_, i) => {
+                if (i >= 25 && i <= 34) return this.renderCMRow(i);
+                else return null;
+              })}
+              {this.renderCMRow(null, 1)}
+            </tbody>
+          </table>
+
+          <table className="width-50 inline-table align-top">
+            <tbody>
+              {this.renderCMHeader("Sediment Control Measures", null, true)}
+              {questions.map((_, i) => {
+                if (i >= 35 && i <= 45) return this.renderCMRow(i);
+                else return null;
+              })}
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <table className="width-50 inline-table align-top">
+            <tbody>
+              {this.renderCMHeader(
+                "Control Measures for Special Conditions",
+                true,
+                false
+              )}
+              {questions.map((_, i) => {
+                if (i >= 46 && i <= 52) return this.renderCMRow(i, null, true);
+                else return null;
+              })}
+              {this.renderCMRow(null, 2, true)}
+            </tbody>
+          </table>
+
+          <table className="width-50 inline-table align-top">
+            <tbody>
+              {this.renderCMHeader(
+                "Materials Handling, Spill Prevention, Waste Management and General Pollution Prevention",
+                false,
+                false
+              )}
+              {questions.map((_, i) => {
+                if (i >= 53 && i <= 61) return this.renderCMRow(i);
+                else return null;
+              })}
+            </tbody>
+          </table>
+        </section>
+
+        {/* GENERAL NOTES */}
+        <section className="margin-top-lg">
+          <h3>GENERAL NOTES</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td className="full-border triple-height align-top pad-left">
+                  {questions[62].answer}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        {/* SITE ASSESSMENT TEXT */}
+        <section>
+          <h3>
+            CONSTRUCTION SITE ASSESSMENT ***off site Pollutant Discharges are a
+            violation of the Permit and Reason for Stop Work***
+          </h3>
+          {questions[63].input_label.split("\n").map((text, i) => (
+            <p key={`text-${i}`} className="margin-top">
+              {text}
+            </p>
+          ))}
+        </section>
+
+        {/* SITE ASSESSMENT TABLE */}
+        <table className="margin-top">
+          <tbody>
+            <tr>
+              <td className="bold full-border">Date of Initial Finding</td>
+              <td className="bold full-border">
+                Location (station #, pole #, intersection, etc)
+              </td>
+              <td className="bold full-border">Control Measure</td>
+              <td className="bold full-border">
+                Condition (Inadequate/Maintenance)
+              </td>
+              <td className="bold full-border">
+                Description of Corrective Action/Comment
+              </td>
+            </tr>
+            {questions.map((_, i) => {
+              if (i >= 64 && i <= 72) return this.renderAssessmentRow(i);
+              else return null;
+            })}
+          </tbody>
+        </table>
+
+        {/* SITE ASSESSMENT FOLLOW-UP QUESTIONS */}
+        <section>
+          <h3>
+            CONSTRUCTION SITE ASSESSMENT ***off site Pollutant Discharges are a
+            violation of the Permit and Reason for Stop Work***
+          </h3>
+          {questions.map((_, i) => {
+            if (i === 73 || i === 74) return this.renderLineQuestion(i);
+            else return null;
+          })}
+        </section>
+      </Fragment>
+    );
+  }
+}
+
+export default XcelForm;

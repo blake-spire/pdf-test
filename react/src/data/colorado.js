@@ -1,0 +1,248 @@
+export default [
+  {
+    input_label: "Facility Name",
+    description: null,
+    answer: "Randall Newman",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Client Name",
+    description: null,
+    answer: "Leonard Payne",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Inspector Name",
+    description: null,
+    answer: "Jonah Middleton",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Phase of Construction",
+    description: null,
+    answer: "Voluptate aut non id",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Municipality",
+    description: null,
+    answer: "Error rerum dolore a",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Date of Inspection",
+    description: null,
+    answer: "2019-08-14T15:03:50.000Z",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Reason for Inspection",
+    description: null,
+    answer: "28",
+    comment: "",
+    options: [
+      { id: 26, name: "Routine", description: "", child_questions: [] },
+      { id: 27, name: "Post Storm", description: "", child_questions: [] },
+      {
+        id: 28,
+        name: "Routine + Post Storm",
+        description: "",
+        child_questions: [],
+      },
+      { id: 29, name: "Final", description: "", child_questions: [] },
+    ],
+  },
+  {
+    input_label: "Existing Weather Conditions",
+    description: null,
+    answer: "Ullamco error non sa",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Storm Event",
+    description: null,
+    answer: "Iusto ab voluptatibu",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Date Began",
+    description: null,
+    answer: "2019-08-12T15:03:53.000Z",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Duration",
+    description: "Hours",
+    answer: "100",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Amount",
+    description: "Inches",
+    answer: "1",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Estimated Acreage of Disturbance",
+    description: null,
+    answer: "10000",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label:
+      "Does a copy of the SWMP and accompanying sediment and erosion control drawings exist at the facility site?",
+    description: null,
+    answer: "3",
+    comment: "herer is a comment",
+    options: [],
+  },
+  {
+    input_label:
+      "Is the discharge permit & acknowledgement letter at the facility site?",
+    description: null,
+    answer: "2",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label:
+      "Are the SWMP and/or accompanying sediment and erosion control drawings updated and documented?",
+    description: null,
+    answer: "1",
+    comment: "another comment",
+    options: [],
+  },
+  {
+    input_label: "Do inspection records exist at the facility site?",
+    description: null,
+    answer: "3",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label:
+      "Have there been and deviations from the minimum inspection frequency as specified in SWMP?",
+    description: null,
+    answer: "2",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label:
+      "Areas to be inspected: When conducting a site inspection, the following areas, if applicable, must be inspected for evidence of, or potential for, pollutants leaving the construction site boundaries, entering the stormwater drainage system or discharging to state waters.",
+    description: null,
+    answer: "1",
+    comment: "inspection scope",
+    options: [],
+  },
+  {
+    input_label: "Construction site perimeter;",
+    description: null,
+    answer: "1",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "All disturbed areas;",
+    description: null,
+    answer: "1",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "All implemented sediment and erosion control practices;",
+    description: null,
+    answer: "2",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Designated haul routes;",
+    description: null,
+    answer: "2",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Materials and waste storage areas exposed to precipitation;",
+    description: null,
+    answer: "1",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label:
+      "Locations where stormwater has the potential to discharge offsite;",
+    description: null,
+    answer: "1",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Locations where vehicles exit the site;",
+    description: null,
+    answer: "2",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label:
+      "Have all inspection requirements been followed in accordance with part Part 1.D.5.b.i-iv of The General Permit COR400000?",
+    description: null,
+    answer: "1",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label:
+      "Is there evidence of the presence of floating materials, visible oil sheen, discoloration, turbidity, odor, etc. in the storm water discharge(s)?",
+    description:
+      "If yes, provide location and notify the SWMP manager immediately.",
+    answer: "1",
+    comment: "evidence report",
+    options: [],
+  },
+  {
+    input_label:
+      "Is there evidence of illicit discharges of sediment or other non-permitted pollutants from the site? If yes, provide location and notify the SWMP manager immediately.",
+    description: null,
+    answer: "3",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label: "Are there locations of control measures needing maintenance?",
+    description: null,
+    answer: "3",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label:
+      "Are there locations where control measures are identified as inadequate?",
+    description: null,
+    answer: "3",
+    comment: "",
+    options: [],
+  },
+  {
+    input_label:
+      "Are there locations where additional control measures are needed that were not in place at the time of the inspection?",
+    description: null,
+    answer: "2",
+    comment: "",
+    options: [],
+  },
+];
