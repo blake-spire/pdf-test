@@ -40,6 +40,9 @@ th span {
 .inline-table {
   float: left;
 }
+.inline-block {
+  display: inline-block;
+}
 
 .bold {
   font-weight: bold;

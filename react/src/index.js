@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Delaware from "./components/delaware";
+import Maryland from "./components/maryland";
 import * as serviceWorker from "./serviceWorker";
 
-import questions from "./data/delaware";
+import questions from "./data/maryland";
 
 ReactDOM.render(
-  <Delaware
+  <Maryland
     questions={questions}
     // mock inspection data for now
     inspection={{ id: 77, inspector: "Justin OConnell", routine_interval: 14 }}
