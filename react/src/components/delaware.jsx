@@ -29,23 +29,29 @@ class DelawareForm extends Component {
 
   renderQuestion = (i, classes) => {
     const question = this.props.questions[i];
-    const { div: divClass, p: pClass } = classes;
 
     return (
-      <div key={i} className={classnames("inline-flex margin-top", divClass)}>
-        <label className="width-auto space-right no-wrap">
+      <div key={i} className={classnames("inline-flex margin-top", classes)}>
+        {/* label */}
+        <label className="width-auto space-right">
           {this.getNumberSpan(i)}
           {question.input_label}:
         </label>
-        <p className={classnames("blank-underline", pClass)}>
+
+        {/* answer */}
+        <p className={"blank-underline width-auto"}>
           {i === 0
             ? moment(question.answer).format(this.dateFormatFull)
             : i === 1 || i === 2
             ? moment(question.answer).format(this.timeFormat)
             : question.answer}
         </p>
+
+        {/* description */}
         {question.description && (
-          <p>({this.getURLFromElement(question.description)})</p>
+          <p className="width-auto">
+            ({this.getURLFromElement(question.description)})
+          </p>
         )}
       </div>
     );
@@ -56,10 +62,13 @@ class DelawareForm extends Component {
 
     return (
       <div key={i} className="inline-flex margin-top width-100">
-        <label className="width-auto space-right no-wrap">
+        {/* label */}
+        <label className="width-auto space-right">
           {this.getNumberSpan(i)}
           {question.input_label}:
         </label>
+
+        {/* checkboxes */}
         {[{ label: "Yes", value: "1" }, { label: "No", value: "2" }].map(
           item => (
             <p className="pad-left pad-right width-auto" key={item.value}>
@@ -73,6 +82,8 @@ class DelawareForm extends Component {
             </p>
           )
         )}
+
+        {/* description */}
         <p className="width-auto">({question.description})</p>
       </div>
     );
@@ -80,9 +91,9 @@ class DelawareForm extends Component {
 
   renderQuestionWithOptions = (i, classes, optionConfig) => {
     const question = this.props.questions[i];
-    const { div: divClass, p: pClass } = classes;
     const { includeDescription, displaySingleAnswer } = optionConfig;
 
+    // get option names and answer
     const optionNames = question.options.map(option => option.name);
     const answerOption = find(
       question.options,
@@ -92,9 +103,10 @@ class DelawareForm extends Component {
     return (
       <div
         key={i}
-        className={classnames("inline-flex margin-top align-center", divClass)}
+        className={classnames("inline-flex margin-top align-center", classes)}
       >
-        <label className="width-auto space-right no-wrap">
+        {/* label */}
+        <label className="width-auto space-right">
           {this.getNumberSpan(i)}
           {question.input_label}
           {includeDescription && (
@@ -105,8 +117,9 @@ class DelawareForm extends Component {
           :
         </label>
 
+        {/* answer */}
         {displaySingleAnswer ? (
-          <p className={classnames("blank-underline", pClass)}>
+          <p className="blank-underline width-auto">
             {answerOption ? answerOption.name : null}
           </p>
         ) : (
@@ -161,7 +174,9 @@ class DelawareForm extends Component {
           {this.getNumberSpan(i)}
           {question.input_label}
         </label>
-        <p className="pad-left-lg">{question.comment}</p>
+        <div className="min-height-5 pad-left-lg">
+          <p>{question.comment}</p>
+        </div>
       </div>
     );
   };
@@ -183,21 +198,12 @@ class DelawareForm extends Component {
         <section>
           {questions.map((_, i) => {
             // set classNames
-            let classes = {
-              div: "width-100 no-wrap",
-              p: "",
-            };
-            if (i === 0) classes = { ...classes, div: "width-50" };
-            else if (i === 1)
-              classes = { div: "width-50 justify-end", p: "width-auto" };
-            else if (i === 2)
-              classes = {
-                div: "width-100 justify-end",
-                p: "width-auto",
-              };
-            else if (i === 4) classes = { ...classes, div: "width-65" };
-            else if (i === 5)
-              classes = { div: "width-35 justify-end", p: "width-auto" };
+            let classes = "width-100";
+            if (i === 0) classes = "width-50";
+            else if (i === 1) classes = "width-50 justify-end";
+            else if (i === 2) classes = "width-100 justify-end";
+            else if (i === 4) classes = "width-65";
+            else if (i === 5) classes = "width-35 justify-end";
 
             // set config for option-type questions
             const optionConfig = {

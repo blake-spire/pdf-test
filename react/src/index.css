@@ -65,6 +65,8 @@ th span {
 
 .bold {
   font-weight: bolder;
+  font-weight: 1000;
+  font-weight: bold;
 }
 
 /* spacing */
@@ -245,4 +247,8 @@ ul {
 }
 .width-100 {
   width: 100%;
+}
+
+.min-height-5 {
+  min-height: 5rem;
 }
