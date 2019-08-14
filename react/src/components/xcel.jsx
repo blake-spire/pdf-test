@@ -2,6 +2,7 @@ import React, { Fragment, Component } from "react";
 import { array } from "prop-types";
 import classnames from "classnames";
 import moment from "moment";
+import { zip, isUndefined } from "lodash";
 
 // return empty string if no date
 moment.updateLocale(moment.locale(), { invalidDate: "" });
@@ -209,94 +210,101 @@ class XcelForm extends Component {
     );
   };
 
-  renderCMHeader = (title, fullBorder, includeSubGrid) => {
+  renderCMTable = (
+    titles,
+    [leftQuestionRange, rightQuestionRange],
+    isTopTable
+  ) => {
+    const headers = ["In SWMP Design", "In Use", "Not Needed at this time"];
+    const [leftStart, leftEnd] = leftQuestionRange;
+    const [rightStart, rightEnd] = rightQuestionRange;
+
+    // get left and right questions and zip them together
+    let leftQuestions = [];
+    let rightQuestions = [];
+    for (let index = leftStart; index <= leftEnd; index++) {
+      leftQuestions.push({ index, ...this.props.questions[index] });
+    }
+    for (let index = rightStart; index <= rightEnd; index++) {
+      rightQuestions.push({ index, ...this.props.questions[index] });
+    }
+    const rows = zip(leftQuestions, rightQuestions);
+
     return (
       <Fragment>
-        {includeSubGrid ? (
-          <tr>
-            <td
-              className={classnames(
-                "width-40",
-                fullBorder ? "left-border" : ""
-              )}
-            />
-            <td className="width-20 pad-left pad-right center">
-              In SWMP Design
-            </td>
-            <td className="width-20 pad-left pad-right center">In Use</td>
-            <td className="width-20 pad-left pad-right center">
-              Not Needed at this time
-            </td>
-          </tr>
-        ) : null}
+        {isTopTable ? (
+          <Fragment>
+            {/* title row */}
+            <tr className="bold">
+              <td colSpan="8">Control Measures at time of Inspection</td>
+            </tr>
 
+            {/* column headers row */}
+            <tr>
+              {Array.from({ length: 2 }, (_, i) => i).map(i => (
+                <Fragment key={i}>
+                  <td className="width-20" />
+                  {headers.map(header => (
+                    <td
+                      className="width-10 pad-left pad-right center"
+                      key={header}
+                    >
+                      {header}
+                    </td>
+                  ))}
+                </Fragment>
+              ))}
+            </tr>
+          </Fragment>
+        ) : null}
+        {/* table titles */}
         <tr>
-          <td
-            colSpan="4"
-            className={classnames(
-              "bold td-pad double-height",
-              fullBorder ? "left-border" : ""
-            )}
-          >
-            {title}
-          </td>
+          {titles.map(title => (
+            <td colSpan="4" key={title} className="bold width-50">
+              {title}
+            </td>
+          ))}
         </tr>
+        {/* table data */}
+        {rows.map((row, i) => this.renderCMRow(row, i))}
       </Fragment>
     );
   };
 
-  renderCMRow = (i, blankCount, fullBorder) => {
-    const question = this.props.questions[i];
+  renderCMRow = (row, i) => {
+    return (
+      <tr key={i}>
+        {/* each row contains a left and right side */}
+        {row.map(question =>
+          isUndefined(question) ? (
+            <td colSpan="4" key={`undefined-${i}`} />
+          ) : (
+            <Fragment key={question.index}>
+              {/* label cell */}
+              <td className="width-20">
+                <span className="space-right">{question.index + 1}.</span>
+                {question.input_label}
 
-    return Array.from({ length: blankCount ? blankCount : 1 }, (_, index) => ({
-      index,
-      isBlank: blankCount ? true : false,
-    })).map(item => (
-      <tr key={item.isBlank ? `blank-${item.index}` : i}>
-        {item.isBlank ? (
-          <td
-            colSpan="4"
-            className={classnames(
-              "double-height blank",
-              fullBorder ? "full-border" : ""
-            )}
-          />
-        ) : (
-          <Fragment>
-            <td
-              className={classnames(
-                "width-40 double-height td-pad",
-                fullBorder ? "full-border" : ""
-              )}
-            >
-              <span className="space-right">{i + 1}.</span>
-              {question.input_label}
-
-              {question.description ? (
-                <span className="font-small space-left">
-                  {/* add colon for other question */}
-                  {question.input_label === "Other"
-                    ? `(${question.description}):`
-                    : `(${question.description})`}
-                </span>
-              ) : null}
-            </td>
-
-            {["30", "31", "32"].map(answerValue => (
-              <td
-                key={`td-${answerValue}`}
-                className={classnames(
-                  "width-20 pad-left pad-right center",
-                  fullBorder ? "full-border" : ""
-                )}
-              >
-                {question.answer === answerValue ? "X" : ""}
+                {question.description ? (
+                  <span className="font-small space-left">
+                    {/* add colon for other question */}
+                    {question.input_label === "Other"
+                      ? `(${question.description}):`
+                      : `(${question.description})`}
+                  </span>
+                ) : null}
               </td>
-            ))}
-          </Fragment>
+              {/* answer cells */}
+              {["30", "31", "32"].map(answerValue => (
+                <td key={`td-${answerValue}`} className="width-10 center">
+                  {question.answer === answerValue ? "X" : ""}
+                </td>
+              ))}
+            </Fragment>
+          )
         )}
       </tr>
-    ));
+    );
   };
 
   renderAssessmentRow = i => {
@@ -427,72 +435,33 @@ class XcelForm extends Component {
               if (i >= 18 && i <= 24) return this.renderSWMPRow(i);
               else return null;
             })}
-
-            <tr className="bold">
-              <td colSpan="5" className="td-pad">
-                Control Measures at time of Inspection
-              </td>
-            </tr>
           </tbody>
         </table>
 
         {/* CONTROL MEASURES  */}
         <section>
-          <table className="width-50 inline-table align-top">
+          <table>
             <tbody>
-              {this.renderCMHeader("Erosion Control Measures", null, true)}
-              {questions.map((_, i) => {
-                if (i >= 25 && i <= 34) return this.renderCMRow(i);
-                else return null;
-              })}
-              {this.renderCMRow(null, 1)}
-            </tbody>
-          </table>
+              {this.renderCMTable(
+                ["Erosion Control Measures", "Sediment Control Measures"],
+                [[25, 34], [35, 45]],
+                true
+              )}
 
-          <table className="width-50 inline-table align-top">
-            <tbody>
-              {this.renderCMHeader("Sediment Control Measures", null, true)}
-              {questions.map((_, i) => {
-                if (i >= 35 && i <= 45) return this.renderCMRow(i);
-                else return null;
-              })}
-            </tbody>
-          </table>
-        </section>
-
-        <section>
-          <table className="width-50 inline-table align-top">
-            <tbody>
-              {this.renderCMHeader(
-                "Control Measures for Special Conditions",
-                true,
+              {this.renderCMTable(
+                [
+                  "Control Measures for Special Conditions",
+                  "Materials Handling, Spill Prevention, Waste Management and General Pollution Prevention",
+                ],
+                [[46, 52], [53, 61]],
                 false
               )}
-              {questions.map((_, i) => {
-                if (i >= 46 && i <= 52) return this.renderCMRow(i, null, true);
-                else return null;
-              })}
-              {this.renderCMRow(null, 2, true)}
-            </tbody>
-          </table>
-
-          <table className="width-50 inline-table align-top">
-            <tbody>
-              {this.renderCMHeader(
-                "Materials Handling, Spill Prevention, Waste Management and General Pollution Prevention",
-                false,
-                false
-              )}
-              {questions.map((_, i) => {
-                if (i >= 53 && i <= 61) return this.renderCMRow(i);
-                else return null;
-              })}
             </tbody>
           </table>
         </section>
 
         {/* GENERAL NOTES */}
-        <section className="margin-top-lg">
+        <section>
           <h3>GENERAL NOTES</h3>
           <table>
             <tbody>

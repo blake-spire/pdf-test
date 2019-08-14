@@ -182,7 +182,7 @@ class ColoradoForm extends Component {
         </section>
 
         {/* first section */}
-        <table>
+        <table className="full-border">
           <tbody>
             {/* first row is tricky because it has a header */}
             <tr>
