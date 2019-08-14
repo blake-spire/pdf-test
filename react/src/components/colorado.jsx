@@ -45,13 +45,16 @@ class ColoradoForm extends Component {
     // stole from stack overflow because i didn't want to type this out
     const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
+    // correct for dashes and alpha numbering
+    const number = i === 16 ? 15 : i === 18 ? 16 : i + 1;
+
     return (
       <span className="space-right">
         {dashesIndex > -1
           ? "-"
           : alphaIndex > -1
           ? `${alphabet[alphaIndex]}.`
-          : `${i + 1}.`}
+          : `${number}.`}
       </span>
     );
   };
