@@ -20,6 +20,26 @@ th {
   padding: 0.25rem 1rem;
 }
 
+/* resolve double borders */
+table ~ table tr:first-of-type td,
+section tr:first-of-type td {
+  border-top: none;
+}
+table ~ table tr:first-of-type td.full-border,
+.inline-table ~ .inline-table tr td:first-of-type.full-border,
+section tr td:first-of-type.full-border,
+table.full-border tr:first-of-type td {
+  border: 1px solid black;
+}
+table ~ table tr:first-of-type td.left-border,
+.inline-table ~ .inline-table tr td:first-of-type.left-border {
+  border-left: 1px solid black;
+}
+table.no-border td,
+table.no-border th {
+  border: none;
+}
+
 th,
 h3 {
   font-size: 1.5rem;
@@ -70,6 +90,9 @@ th span {
 .pad-left {
   padding-left: 1rem;
 }
+.pad-left-lg {
+  padding-left: 1.4rem;
+}
 .pad-right {
   padding-right: 1rem;
 }
@@ -82,23 +105,6 @@ th span {
 }
 .space-right {
   padding-right: 0.25rem;
-}
-
-/* resolve double borders */
-table ~ table tr:first-of-type td,
-section tr:first-of-type td {
-  border-top: none;
-}
-
-table ~ table tr:first-of-type td.full-border,
-.inline-table ~ .inline-table tr td:first-of-type.full-border,
-section tr td:first-of-type.full-border,
-table.full-border tr:first-of-type td {
-  border: 1px solid black;
-}
-table ~ table tr:first-of-type td.left-border,
-.inline-table ~ .inline-table tr td:first-of-type.left-border {
-  border-left: 1px solid black;
 }
 
 .font-small {
@@ -126,6 +132,13 @@ h3 {
   display: -webkit-inline-flex;
   display: inline-flex;
 }
+.justify-end {
+  justify-content: flex-end;
+}
+.align-center {
+  align-items: center;
+}
+
 .inline-table {
   display: inline-block;
   overflow: hidden;
@@ -137,11 +150,32 @@ h3 {
 .center {
   text-align: center;
 }
+.right {
+  text-align: right;
+}
+
+table tr td.border-bottom {
+  border-bottom: 1px solid black;
+}
 
 .blank-underline {
   border-bottom: 1px solid black;
   padding-left: 1rem;
   padding-right: 5rem;
+}
+.blank-underline-lg {
+  border-bottom: 1px solid black;
+  padding-left: 1rem;
+  padding-right: 50%;
+}
+.blank-underline-x-lg {
+  border-bottom: 1px solid black;
+  padding-left: 1rem;
+  padding-right: 100%;
+}
+.blank-underline-center {
+  border-bottom: 1px solid black;
+  width: 50px;
 }
 
 ul {
@@ -150,6 +184,10 @@ ul {
 
 .bg-grey {
   background-color: #d8d8d8;
+}
+
+.no-wrap {
+  white-space: nowrap;
 }
 
 /* circled answers */
@@ -175,6 +213,9 @@ ul {
 }
 
 /* widths */
+.width-auto {
+  width: auto;
+}
 .width-5 {
   width: 5%;
 }
@@ -184,9 +225,24 @@ ul {
 .width-20 {
   width: 20%;
 }
+.width-25 {
+  width: 25%;
+}
+.width-35 {
+  width: 35%;
+}
 .width-40 {
   width: 40%;
 }
 .width-50 {
   width: 50%;
+}
+.width-65 {
+  width: 65%;
+}
+.width-75 {
+  width: 75%;
+}
+.width-100 {
+  width: 100%;
 }
