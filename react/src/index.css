@@ -22,13 +22,15 @@ th {
 
 /* resolve double borders */
 table ~ table tr:first-of-type td,
+table ~ table tr:first-of-type th,
 section tr:first-of-type td {
   border-top: none;
 }
 table ~ table tr:first-of-type td.full-border,
 .inline-table ~ .inline-table tr td:first-of-type.full-border,
 section tr td:first-of-type.full-border,
-table.full-border tr:first-of-type td {
+table.full-border tr:first-of-type td,
+table.full-border tr:first-of-type th {
   border: 1px solid black;
 }
 table ~ table tr:first-of-type td.left-border,
@@ -40,7 +42,6 @@ table.no-border th {
   border: none;
 }
 
-th,
 h3 {
   font-size: 1.5rem;
 }
@@ -70,6 +71,10 @@ th span {
   font-weight: bolder;
   font-weight: 1000;
   font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
 }
 
 /* spacing */

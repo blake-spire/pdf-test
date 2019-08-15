@@ -55,7 +55,7 @@ class XcelForm extends Component {
         <p
           className={classnames(
             "inline",
-            question.answer === "1" ? "answer" : ""
+            question.answer === "1" ? "answer" : null
           )}
         >
           Yes
@@ -63,7 +63,7 @@ class XcelForm extends Component {
         <p
           className={classnames(
             "inline",
-            question.answer === "2" ? "answer" : ""
+            question.answer === "2" ? "answer" : null
           )}
         >
           No
@@ -132,14 +132,14 @@ class XcelForm extends Component {
                     <p
                       className={classnames(
                         optionClass,
-                        isAnswer && !isArray ? "answer" : ""
+                        isAnswer && !isArray ? "answer" : null
                       )}
                     >
                       {checkbox && (
                         <span
                           className={classnames(
                             "checkbox",
-                            isAnswer && isArray ? "checked" : ""
+                            isAnswer && isArray ? "checked" : null
                           )}
                         />
                       )}
@@ -195,13 +195,13 @@ class XcelForm extends Component {
           )}
         </td>
         <td className="center width-5">
-          <label className="bold">{question.answer === "1" ? "X" : ""}</label>
+          <label className="bold">{question.answer === "1" ? "X" : null}</label>
         </td>
         <td className="center width-5">
-          <label className="bold">{question.answer === "2" ? "X" : ""}</label>
+          <label className="bold">{question.answer === "2" ? "X" : null}</label>
         </td>
         <td className="center width-5">
-          <label className="bold">{question.answer === "3" ? "X" : ""}</label>
+          <label className="bold">{question.answer === "3" ? "X" : null}</label>
         </td>
         <td>
           <label className="bold">{question.comment}</label>
@@ -297,7 +297,7 @@ class XcelForm extends Component {
               {/* answer cells */}
               {["30", "31", "32"].map(answerValue => (
                 <td key={`td-${answerValue}`} className="width-10 center">
-                  {question.answer === answerValue ? "X" : ""}
+                  {question.answer === answerValue ? "X" : null}
                 </td>
               ))}
             </Fragment>
