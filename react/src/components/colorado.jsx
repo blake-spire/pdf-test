@@ -1,28 +1,36 @@
 import React, { Fragment, Component } from "react";
-import { array, shape, number, string } from "prop-types";
+import { arrayOf, string, shape, number } from "prop-types";
 import classnames from "classnames";
 import moment from "moment";
 import { find, toString } from "lodash";
 
 // return empty string if no date
 moment.updateLocale(moment.locale(), { invalidDate: "" });
+const dateTimeFormat = "MM/D/YYYY h:mm A";
 
 class ColoradoForm extends Component {
   static propTypes = {
-    questions: array.isRequired,
+    questions: arrayOf(
+      shape({
+        input_label: string.isRequired,
+        description: string,
+        answer: string,
+        comment: string,
+        options: arrayOf(
+          shape({
+            id: number.isRequired,
+            name: string.isRequired,
+            description: string,
+          })
+        ),
+      })
+    ).isRequired,
     inspection: shape({
       id: number.isRequired,
       inspector: string.isRequired,
       routine_interval: number.isRequired,
     }).isRequired,
   };
-
-  constructor(props) {
-    super(props);
-    this.dateFormat = "MM/D/YYYY";
-    this.timeFormat = "h:mm A";
-    this.dateTimeFormat = "MM/D/YYYY h:mm A";
-  }
 
   getNumberSpan = i => {
     // not so fun. we need to remap numbers :(
@@ -104,7 +112,7 @@ class ColoradoForm extends Component {
         <td>
           <p>
             {i === 5 || i === 9
-              ? moment(question.answer).format(this.dateTimeFormat)
+              ? moment(question.answer).format(dateTimeFormat)
               : i === 6
               ? this.getAnswerFromOptions(question)
               : question.answer}

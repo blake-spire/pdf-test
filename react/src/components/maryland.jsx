@@ -1,23 +1,33 @@
 import React, { Fragment, Component } from "react";
-import { array } from "prop-types";
+import { arrayOf, string, shape, number } from "prop-types";
 import classnames from "classnames";
 import moment from "moment";
 import { toString, isArray } from "lodash";
 
 // return empty string if no date
 moment.updateLocale(moment.locale(), { invalidDate: "" });
+const dateFormat = "MM/D/YYYY";
+const timeFormat = "h:mm A";
+const dateTimeFormat = "MM/D/YYYY h:mm A";
 
 class MarylandForm extends Component {
   static propTypes = {
-    questions: array.isRequired,
+    questions: arrayOf(
+      shape({
+        input_label: string.isRequired,
+        description: string,
+        answer: string,
+        comment: string,
+        options: arrayOf(
+          shape({
+            id: number.isRequired,
+            name: string.isRequired,
+            description: string,
+          })
+        ),
+      })
+    ).isRequired,
   };
-
-  constructor(props) {
-    super(props);
-    this.dateFormat = "MM/D/YYYY";
-    this.timeFormat = "h:mm A";
-    this.dateTimeFormat = "MM/D/YYYY h:mm A";
-  }
 
   getNumberSpan = (i, correction) => {
     const number = correction ? i + 1 - correction : i + 1;
@@ -41,11 +51,11 @@ class MarylandForm extends Component {
 
     const displayAnswer =
       dateQuestions.indexOf(i) > -1
-        ? moment(answer).format(this.dateFormat)
+        ? moment(answer).format(dateFormat)
         : timeQuestions.indexOf(i) > -1
-        ? moment(answer).format(this.timeFormat)
+        ? moment(answer).format(timeFormat)
         : dateTimeQuestions.indexOf(i) > -1
-        ? moment(answer).format(this.dateTimeFormat)
+        ? moment(answer).format(dateTimeFormat)
         : answer;
 
     return comment ? (
@@ -189,7 +199,7 @@ class MarylandForm extends Component {
         <td>{this.getLabel(null, question, null, true)}</td>
         <td>{this.renderYesNo(checkboxAnswer)}</td>
         <td>{question.comment}</td>
-        <td>{moment(dateAnswer).format(this.dateFormat)}</td>
+        <td>{moment(dateAnswer).format(dateFormat)}</td>
       </tr>
     );
   };

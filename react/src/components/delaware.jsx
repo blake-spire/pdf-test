@@ -1,23 +1,32 @@
 import React, { Fragment, Component } from "react";
-import { array } from "prop-types";
+import { arrayOf, string, shape, number } from "prop-types";
 import classnames from "classnames";
 import moment from "moment";
 import { find, toString } from "lodash";
 
 // return empty string if no date
 moment.updateLocale(moment.locale(), { invalidDate: "" });
+const dateFormat = "D MMMM YYYY";
+const timeFormat = "h:mm a";
 
 class DelawareForm extends Component {
   static propTypes = {
-    questions: array.isRequired,
+    questions: arrayOf(
+      shape({
+        input_label: string.isRequired,
+        description: string,
+        answer: string,
+        comment: string,
+        options: arrayOf(
+          shape({
+            id: number.isRequired,
+            name: string.isRequired,
+            description: string,
+          })
+        ),
+      })
+    ).isRequired,
   };
-
-  constructor(props) {
-    super(props);
-    this.dateFormatFull = "D MMMM YYYY";
-    this.dateFormat = "M/D/YYYY";
-    this.timeFormat = "h:mm a";
-  }
 
   getNumberSpan = i => {
     return <span className="space-right">{i + 1}.</span>;
@@ -41,9 +50,9 @@ class DelawareForm extends Component {
         {/* answer */}
         <p className={"blank-underline width-auto"}>
           {i === 0
-            ? moment(question.answer).format(this.dateFormatFull)
+            ? moment(question.answer).format(dateFormat)
             : i === 1 || i === 2
-            ? moment(question.answer).format(this.timeFormat)
+            ? moment(question.answer).format(timeFormat)
             : question.answer}
         </p>
 

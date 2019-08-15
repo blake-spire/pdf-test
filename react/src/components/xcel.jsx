@@ -1,22 +1,32 @@
 import React, { Fragment, Component } from "react";
-import { array } from "prop-types";
+import { arrayOf, string, shape, number } from "prop-types";
 import classnames from "classnames";
 import moment from "moment";
 import { zip, isUndefined } from "lodash";
 
 // return empty string if no date
 moment.updateLocale(moment.locale(), { invalidDate: "" });
+const dateFormat = "MM/D/YYYY";
+const timeFormat = "h:mm A";
 
 class XcelForm extends Component {
   static propTypes = {
-    questions: array.isRequired,
+    questions: arrayOf(
+      shape({
+        input_label: string.isRequired,
+        description: string,
+        answer: string,
+        comment: string,
+        options: arrayOf(
+          shape({
+            id: number.isRequired,
+            name: string.isRequired,
+            description: string,
+          })
+        ),
+      })
+    ).isRequired,
   };
-
-  constructor(props) {
-    super(props);
-    this.dateFormat = "MM/D/YYYY";
-    this.timeFormat = "h:mm A";
-  }
 
   renderRow = (i, cellCount, dateIndexes = [], timeIndexes = []) => {
     return (
@@ -35,9 +45,9 @@ class XcelForm extends Component {
               </label>
               <p>
                 {isDate
-                  ? moment(question.answer).format(this.dateFormat)
+                  ? moment(question.answer).format(dateFormat)
                   : isTime
-                  ? moment(question.answer).format(this.timeFormat)
+                  ? moment(question.answer).format(timeFormat)
                   : question.answer}
               </p>
             </td>
@@ -162,7 +172,7 @@ class XcelForm extends Component {
                             <span className="blank-underline">
                               {[0, 1].indexOf(iii) > -1
                                 ? moment(childQuestion.answer).format(
-                                    this.dateFormat
+                                    dateFormat
                                   )
                                 : childQuestion.answer}
                             </span>
@@ -315,7 +325,7 @@ class XcelForm extends Component {
         {JSON.parse(question.answer).map((answer, ii) => {
           return (
             <td key={`${i}-${ii}`}>
-              {ii === 0 ? moment(answer).format(this.dateFormat) : answer}
+              {ii === 0 ? moment(answer).format(dateFormat) : answer}
             </td>
           );
         })}
