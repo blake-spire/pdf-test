@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Maryland from "./components/maryland";
+import Xcel from "./components/xcel";
 import * as serviceWorker from "./serviceWorker";
 
-import questions from "./data/maryland";
+import questions from "./data/xcel-noanswers";
 
 ReactDOM.render(
-  <Maryland
+  <Xcel
     questions={questions}
     // mock inspection data for now
     inspection={{ id: 77, inspector: "Justin OConnell", routine_interval: 14 }}

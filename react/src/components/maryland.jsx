@@ -118,7 +118,8 @@ class MarylandForm extends Component {
   };
 
   renderCheckboxes = (i, { options, answer }) => {
-    const selectedAnswer = JSON.parse(answer) ? JSON.parse(answer) : answer;
+    const selectedAnswer =
+      answer.length && JSON.parse(answer) ? JSON.parse(answer) : answer;
 
     return (
       <Fragment>
@@ -191,7 +192,11 @@ class MarylandForm extends Component {
 
   renderPermitCoverageRow = i => {
     const question = this.props.questions[i];
-    const [checkboxAnswer, dateAnswer] = JSON.parse(question.answer);
+    // can't parse an empty string :(
+    const answer = question.answer.length
+      ? JSON.parse(question.answer)
+      : ["", ""];
+    const [checkboxAnswer, dateAnswer] = answer;
 
     return (
       <tr key={i}>
@@ -238,7 +243,11 @@ class MarylandForm extends Component {
 
   renderBMPRow = i => {
     const question = this.props.questions[i];
-    const [install, maintenance, location] = JSON.parse(question.answer);
+    // can't parse an empty string :(
+    const answer = question.answer.length
+      ? JSON.parse(question.answer)
+      : ["", "", ""];
+    const [install, maintenance, location] = answer;
 
     return (
       <tr key={i}>

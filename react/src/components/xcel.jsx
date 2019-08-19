@@ -114,7 +114,11 @@ class XcelForm extends Component {
     const question = this.props.questions[i];
     // get answer
     let answer, isArray;
-    if (typeof JSON.parse(question.answer) === "object") {
+    if (
+      // can't parse an empty string
+      question.answer.length &&
+      typeof JSON.parse(question.answer) === "object"
+    ) {
       isArray = true;
       answer = JSON.parse(question.answer);
     } else {
@@ -319,10 +323,12 @@ class XcelForm extends Component {
 
   renderAssessmentRow = i => {
     const question = this.props.questions[i];
+    // can't parse an empty string
+    const answers = question.answer.length ? JSON.parse(question.answer) : [];
 
     return (
       <tr key={i}>
-        {JSON.parse(question.answer).map((answer, ii) => {
+        {answers.map((answer, ii) => {
           return (
             <td key={`${i}-${ii}`}>
               {ii === 0 ? moment(answer).format(dateFormat) : answer}
