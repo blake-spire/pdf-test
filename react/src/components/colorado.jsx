@@ -181,8 +181,14 @@ class ColoradoForm extends Component {
 
     return (
       <Fragment>
-        <section>
-          <h3 className="bold center">CMS Environmental Solutions</h3>
+        <section className="center">
+          <img
+            className="double-height"
+            src={
+              process.env.PUBLIC_URL +
+              "/assets/CMS-New-Logo-2015-Horizontal.png"
+            }
+          />
         </section>
 
         {/* first section */}
@@ -193,7 +199,7 @@ class ColoradoForm extends Component {
               {this.renderTableQuestion(0)}
               <td
                 colSpan="2"
-                className="bg-grey font-large bold center width-50"
+                className="bg-grey bold center width-50"
               >{`SWMP FIELD INSPECTION REPORT #${inspection.id}`}</td>
             </tr>
 

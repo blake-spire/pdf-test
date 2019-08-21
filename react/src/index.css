@@ -1,10 +1,22 @@
+@charset "utf-8";
+@font-face {
+  font-family: "Times New Roman Bold";
+  src: url("https://www.fontify.me/cm/ae25b74721ad09fc4f8ace6d425253e8/times-new-roman-grassetto.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   font-size: 9pt;
 }
 
 body * {
-  font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia,
+  font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia,
     serif;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
 }
 
 table {
@@ -69,8 +81,12 @@ th span {
 }
 
 .bold {
+  font-family: "Times New Roman Bold", TimesNewRoman, "Times New Roman", Times,
+    Baskerville, Georgia, serif;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
   font-weight: bolder;
-  font-weight: 1000;
   font-weight: bold;
 }
 
