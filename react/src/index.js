@@ -9,6 +9,7 @@ import questions from "./data/colorado";
 ReactDOM.render(
   <Colorado
     questions={questions}
+    // imageBase64String={imageBase64String}
     // mock inspection data for now
     inspection={{ id: 77, inspector: "Justin OConnell", routine_interval: 14 }}
   />,

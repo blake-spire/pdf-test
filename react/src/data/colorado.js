@@ -112,7 +112,7 @@ export default [
     input_label:
       "Is the discharge permit & acknowledgement letter at the facility site?",
     description: null,
-    answer: "2",
+    answer: "3",
     comment: "",
     options: [],
   },
@@ -135,7 +135,7 @@ export default [
     input_label:
       "Have there been and deviations from the minimum inspection frequency as specified in SWMP?",
     description: null,
-    answer: "2",
+    answer: "3",
     comment: "",
     options: [],
   },

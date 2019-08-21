@@ -25,6 +25,7 @@ class ColoradoForm extends Component {
       inspector: string.isRequired,
       routine_interval: number.isRequired,
     }).isRequired,
+    imageBase64String: string.isRequired,
   };
 
   getNumberSpan = i => {
@@ -78,15 +79,13 @@ class ColoradoForm extends Component {
       : answer;
   };
 
-  renderTableRow = i => {
-    if (i % 2 === 1) {
-      return (
-        <tr key={i}>
-          {this.renderTableQuestion(i)}
-          {this.renderTableQuestion(i + 1)}
-        </tr>
-      );
-    } else return null;
+  renderTableRow = ([first, second]) => {
+    return (
+      <tr key={first}>
+        {this.renderTableQuestion(first)}
+        {this.renderTableQuestion(second)}
+      </tr>
+    );
   };
 
   renderTableQuestion = i => {
@@ -115,6 +114,26 @@ class ColoradoForm extends Component {
     );
   };
 
+  renderSingleCellQuestions = () => {
+    const indexes = [8, 9, 10, 11];
+
+    return indexes.map(i => {
+      const question = this.props.questions[i];
+      return (
+        <td key={i} className="width-25">
+          <label className="inline">
+            {question.input_label}
+            {question.description && (
+              <span className="space-left">({question.description})</span>
+            )}
+            :
+          </label>
+          <p className="inline space-left">{question.answer}</p>
+        </td>
+      );
+    });
+  };
+
   renderHeaderRow = title => {
     return (
       <tr>
@@ -123,8 +142,8 @@ class ColoradoForm extends Component {
           <td
             key={item}
             className={classnames(
-              "center bg-grey bold",
-              i === 3 ? "width-20" : "width-10"
+              "center bg-grey bold no-pad",
+              i === 3 ? "width-35" : "width-5"
             )}
           >
             {item}
@@ -153,7 +172,7 @@ class ColoradoForm extends Component {
 
           {/* answer */}
           {["1", "2", "3"].map(answer => (
-            <td key={answer} className="center">
+            <td key={answer} className="center no-pad-left no-pad-right">
               {question.answer === answer ? "X" : null}
             </td>
           ))}
@@ -179,15 +198,15 @@ class ColoradoForm extends Component {
   render() {
     const { questions, inspection } = this.props;
 
+    console.log(questions);
+
     return (
       <Fragment>
         <section className="center">
           <img
-            className="double-height"
-            src={
-              process.env.PUBLIC_URL +
-              "/assets/CMS-New-Logo-2015-Horizontal.png"
-            }
+            className="height-4"
+            src={`data:image/png;base64, ${this.props.imageBase64String}`}
+            alt="cms logo"
           />
         </section>
 
@@ -203,11 +222,11 @@ class ColoradoForm extends Component {
               >{`SWMP FIELD INSPECTION REPORT #${inspection.id}`}</td>
             </tr>
 
-            {/* render remaining rows */}
-            {questions.map((_, i) => {
-              if (i >= 1 && i <= 12) return this.renderTableRow(i);
-              else return null;
-            })}
+            {/* render remaining rows in a new order */}
+            {[[1, 5], [2, 6], [7, 4], [3, 12]].map(pair =>
+              this.renderTableRow(pair)
+            )}
+            <tr>{this.renderSingleCellQuestions()}</tr>
           </tbody>
         </table>
 

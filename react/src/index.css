@@ -8,7 +8,7 @@
 }
 
 html {
-  font-size: 9pt;
+  font-size: 10px;
 }
 
 body * {
@@ -125,6 +125,15 @@ th span {
 }
 .pad-bottom {
   padding-bottom: 2rem;
+}
+.no-pad {
+  padding: 0;
+}
+.no-pad-left {
+  padding-left: 0;
+}
+.no-pad-right {
+  padding-right: 0;
 }
 
 .space-left {
@@ -243,6 +252,9 @@ ul {
 .width-auto {
   width: auto;
 }
+.width-3 {
+  width: 3%;
+}
 .width-5 {
   width: 5%;
 }
@@ -276,6 +288,9 @@ ul {
 
 .min-height-5 {
   min-height: 5rem;
+}
+.height-4 {
+  height: 4rem;
 }
 
 tr {
