@@ -1,9 +1,10 @@
 html {
-  font-size: 11px;
+  font-size: 9pt;
 }
 
 body * {
-  font-family: "Times New Roman", Times, serif !important;
+  font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia,
+    serif;
 }
 
 table {
@@ -259,4 +260,8 @@ ul {
 
 .min-height-5 {
   min-height: 5rem;
+}
+
+tr {
+  break-after: page;
 }

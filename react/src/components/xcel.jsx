@@ -1,13 +1,7 @@
 import React, { Fragment, Component } from "react";
 import { arrayOf, string, shape, number } from "prop-types";
 import classnames from "classnames";
-import moment from "moment";
 import { zip, isUndefined } from "lodash";
-
-// return empty string if no date
-moment.updateLocale(moment.locale(), { invalidDate: "" });
-const dateFormat = "MM/D/YYYY";
-const timeFormat = "h:mm A";
 
 class XcelForm extends Component {
   static propTypes = {
@@ -22,34 +16,29 @@ class XcelForm extends Component {
             id: number.isRequired,
             name: string.isRequired,
             description: string,
+            child_questions: arrayOf(
+              shape({
+                input_label: string,
+                answer: string,
+              })
+            ),
           })
         ),
       })
     ).isRequired,
   };
 
-  renderRow = (i, cellCount, dateIndexes = [], timeIndexes = []) => {
+  renderRow = (i, cellCount) => {
     return (
       <tr key={i}>
         {Array.from({ length: cellCount }, (_, i) => i).map(ii => {
           const index = i + ii;
-          const isDate = dateIndexes.indexOf(ii) > -1;
-          const isTime = timeIndexes.indexOf(ii) > -1;
           const question = this.props.questions[index];
 
           return (
             <td key={`question-${i}-cell-${ii}`}>
-              <label>
-                <span className="space-right">{index + 1}.</span>
-                {question.input_label}:
-              </label>
-              <p>
-                {isDate
-                  ? moment(question.answer).format(dateFormat)
-                  : isTime
-                  ? moment(question.answer).format(timeFormat)
-                  : question.answer}
-              </p>
+              <label>{question.input_label}:</label>
+              <p>{question.answer}</p>
             </td>
           );
         })}
@@ -88,10 +77,7 @@ class XcelForm extends Component {
     return (
       <tr key={i}>
         <td colSpan="2">
-          <label className="inline">
-            <span className="space-right">{i + 1}.</span>
-            {question.input_label}:
-          </label>
+          <label className="inline">{question.input_label}:</label>
 
           {includeYesNo ? (
             this.renderYesNo(i)
@@ -130,7 +116,6 @@ class XcelForm extends Component {
       <tr key={i}>
         <td colSpan="2">
           <label className={labelClass}>
-            <span className="space-right">{i + 1}.</span>
             {labelName || question.input_label}
           </label>
 
@@ -174,11 +159,7 @@ class XcelForm extends Component {
                           >
                             <span>{childQuestion.input_label}</span>
                             <span className="blank-underline">
-                              {[0, 1].indexOf(iii) > -1
-                                ? moment(childQuestion.answer).format(
-                                    dateFormat
-                                  )
-                                : childQuestion.answer}
+                              {childQuestion.answer}
                             </span>
                           </p>
                         ))}
@@ -200,7 +181,6 @@ class XcelForm extends Component {
     return (
       <tr key={i}>
         <td className="width-50 td-pad">
-          <span className="space-right">{i + 1}.</span>
           {question.input_label}
           {question.description && (
             <span className="font-small space-left">
@@ -296,7 +276,6 @@ class XcelForm extends Component {
             <Fragment key={question.index}>
               {/* label cell */}
               <td className="width-20">
-                <span className="space-right">{question.index + 1}.</span>
                 {question.input_label}
 
                 {question.description ? (
@@ -329,11 +308,7 @@ class XcelForm extends Component {
     return (
       <tr key={i}>
         {answers.map((answer, ii) => {
-          return (
-            <td key={`${i}-${ii}`}>
-              {ii === 0 ? moment(answer).format(dateFormat) : answer}
-            </td>
-          );
+          return <td key={`${i}-${ii}`}>{answer}</td>;
         })}
         <td>{question.comment}</td>
       </tr>
@@ -345,10 +320,7 @@ class XcelForm extends Component {
 
     return (
       <div key={i} className="margin-bottom">
-        <p>
-          <span className="space-right">{i + 1}.</span>
-          {question.input_label}
-        </p>
+        <p>{question.input_label}</p>
         <div className="margin-left">{this.renderYesNo(i)}</div>
         {question.description && (
           <p className="margin-left">{question.description}</p>
@@ -389,7 +361,7 @@ class XcelForm extends Component {
         <table>
           <tbody>
             {questions.map((_, i) => {
-              if (i === 9) return this.renderRow(i, 3, [0]);
+              if (i === 9) return this.renderRow(i, 3);
               else return null;
             })}
           </tbody>
@@ -399,7 +371,7 @@ class XcelForm extends Component {
         <table>
           <tbody>
             {questions.map((_, i) => {
-              if (i === 12) return this.renderRow(i, 2, [], [0, 1]);
+              if (i === 12) return this.renderRow(i, 2);
               else if (i === 14) return this.renderFullWidthRowInline({ i });
               else if (i === 15)
                 return this.renderFullWidthRow({
@@ -433,18 +405,14 @@ class XcelForm extends Component {
 
             <tr>
               <td className="width-50" />
-              <td className="center width-5">
-                <label className="bold">Yes</label>
-              </td>
-              <td className="center width-5">
-                <label className="bold">No</label>
-              </td>
-              <td className="center width-5">
-                <label className="bold">N/A</label>
-              </td>
-              <td>
-                <label className="bold">Comments</label>
-              </td>
+              {["Yes", "No", "N/A", "Comments"].map((td, ii) => (
+                <td
+                  className={classnames(ii < 3 ? "center width-5" : "bold")}
+                  key={td}
+                >
+                  <label className="bold">{td}</label>
+                </td>
+              ))}
             </tr>
 
             {questions.map((_, i) => {

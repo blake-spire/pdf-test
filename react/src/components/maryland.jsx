@@ -1,14 +1,7 @@
 import React, { Fragment, Component } from "react";
 import { arrayOf, string, shape, number } from "prop-types";
 import classnames from "classnames";
-import moment from "moment";
 import { toString, isArray } from "lodash";
-
-// return empty string if no date
-moment.updateLocale(moment.locale(), { invalidDate: "" });
-const dateFormat = "MM/D/YYYY";
-const timeFormat = "h:mm A";
-const dateTimeFormat = "MM/D/YYYY h:mm A";
 
 class MarylandForm extends Component {
   static propTypes = {
@@ -23,21 +16,24 @@ class MarylandForm extends Component {
             id: number.isRequired,
             name: string.isRequired,
             description: string,
+            child_questions: arrayOf(
+              shape({
+                id: number,
+                input_label: string,
+                description: string,
+                answer: string,
+                comment: string,
+              })
+            ),
           })
         ),
       })
     ).isRequired,
   };
 
-  getNumberSpan = (i, correction) => {
-    const number = correction ? i + 1 - correction : i + 1;
-    return <span className="space-right">{number}.</span>;
-  };
-
-  getLabel = (i, { input_label, description }, classes, hideNumberSpan) => {
+  getLabel = (i, { input_label, description }, classes) => {
     return (
       <label className={classes}>
-        {hideNumberSpan ? null : this.getNumberSpan(i)}
         {input_label}
         {description && <span className="space-left">({description})</span>}:
       </label>
@@ -45,26 +41,13 @@ class MarylandForm extends Component {
   };
 
   getAnswer = (i, { answer, comment }) => {
-    const dateQuestions = [3, 9];
-    const timeQuestions = [4, 5];
-    const dateTimeQuestions = [13];
-
-    const displayAnswer =
-      dateQuestions.indexOf(i) > -1
-        ? moment(answer).format(dateFormat)
-        : timeQuestions.indexOf(i) > -1
-        ? moment(answer).format(timeFormat)
-        : dateTimeQuestions.indexOf(i) > -1
-        ? moment(answer).format(dateTimeFormat)
-        : answer;
-
     return comment ? (
       <div>
-        <p>{displayAnswer}</p>
+        <p>{answer}</p>
         <p>{comment}</p>
       </div>
     ) : (
-      <p className="width-auto inline">{displayAnswer}</p>
+      <p className="width-auto inline">{answer}</p>
     );
   };
 
@@ -144,7 +127,7 @@ class MarylandForm extends Component {
             {option.child_questions.length
               ? option.child_questions.map(question => (
                   <div key={question.id}>
-                    {this.getLabel(null, question, "inline space-right", true)}
+                    {this.getLabel(null, question, "inline space-right")}
                     {this.getAnswer(null, question)}
                   </div>
                 ))
@@ -162,7 +145,7 @@ class MarylandForm extends Component {
 
               return (
                 <div key={`follow-up-${index}`}>
-                  {this.getLabel(index, question, "inline space-right", true)}
+                  {this.getLabel(index, question, "inline space-right")}
                   {this.getAnswer(index, question)}
                 </div>
               );
@@ -200,11 +183,11 @@ class MarylandForm extends Component {
 
     return (
       <tr key={i}>
-        <td className="width-5">{this.getNumberSpan(i, 16)}</td>
+        <td className="width-5 center">{this.getNumbering(i, 15)}</td>
         <td>{this.getLabel(null, question, null, true)}</td>
         <td>{this.renderYesNo(checkboxAnswer)}</td>
         <td>{question.comment}</td>
-        <td>{moment(dateAnswer).format(dateFormat)}</td>
+        <td>{dateAnswer}</td>
       </tr>
     );
   };
@@ -218,7 +201,7 @@ class MarylandForm extends Component {
       <Fragment key={i}>
         <tr>
           {showNumber ? (
-            <td className="width-5">{this.getNumberSpan(i, 27)}</td>
+            <td className="width-5 center">{this.getNumbering(i, 26)}</td>
           ) : null}
           <td colSpan={showNumber ? 1 : 2} className="width-50">
             {this.getLabel(null, question, null, true)}
@@ -251,7 +234,7 @@ class MarylandForm extends Component {
 
     return (
       <tr key={i}>
-        <td>{this.getNumberSpan(i, 34)}</td>
+        <td className="center">{this.getNumbering(i, 33)}</td>
         <td>{this.getLabel(null, question, null, true)}</td>
         <td>{this.renderYesNo(install)}</td>
         <td>{this.renderYesNo(maintenance)}</td>
@@ -259,6 +242,10 @@ class MarylandForm extends Component {
         <td>{question.comment}</td>
       </tr>
     );
+  };
+
+  getNumbering = (i, correction) => {
+    return <p>{i - correction}</p>;
   };
 
   render() {

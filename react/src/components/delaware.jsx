@@ -1,13 +1,7 @@
 import React, { Fragment, Component } from "react";
 import { arrayOf, string, shape, number } from "prop-types";
 import classnames from "classnames";
-import moment from "moment";
 import { find, toString } from "lodash";
-
-// return empty string if no date
-moment.updateLocale(moment.locale(), { invalidDate: "" });
-const dateFormat = "D MMMM YYYY";
-const timeFormat = "h:mm a";
 
 class DelawareForm extends Component {
   static propTypes = {
@@ -21,15 +15,14 @@ class DelawareForm extends Component {
           shape({
             id: number.isRequired,
             name: string.isRequired,
-            description: string,
           })
         ),
       })
     ).isRequired,
   };
 
-  getNumberSpan = i => {
-    return <span className="space-right">{i + 1}.</span>;
+  getNumberSpan = (i, correction) => {
+    return <span className="space-right">{i - correction}.</span>;
   };
 
   getURLFromElement = element => {
@@ -43,18 +36,11 @@ class DelawareForm extends Component {
       <div key={i} className={classnames("inline-flex margin-top", classes)}>
         {/* label */}
         <label className="width-auto space-right">
-          {this.getNumberSpan(i)}
           {question.input_label}:
         </label>
 
         {/* answer */}
-        <p className={"blank-underline width-auto"}>
-          {i === 0
-            ? moment(question.answer).format(dateFormat)
-            : i === 1 || i === 2
-            ? moment(question.answer).format(timeFormat)
-            : question.answer}
-        </p>
+        <p className={"blank-underline width-auto"}>{question.answer}</p>
 
         {/* description */}
         {question.description && (
@@ -73,7 +59,6 @@ class DelawareForm extends Component {
       <div key={i} className="inline-flex margin-top width-100">
         {/* label */}
         <label className="width-auto space-right">
-          {this.getNumberSpan(i)}
           {question.input_label}:
         </label>
 
@@ -116,7 +101,6 @@ class DelawareForm extends Component {
       >
         {/* label */}
         <label className="width-auto space-right">
-          {this.getNumberSpan(i)}
           {question.input_label}
           {includeDescription && (
             <span className="space-left font-small">
@@ -167,7 +151,7 @@ class DelawareForm extends Component {
     return (
       <div key={i} className="margin-top margin-left inline-flex width-100">
         <label className="width-35">
-          {this.getNumberSpan(i)}
+          {this.getNumberSpan(i, 12)}
           {question.input_label}
         </label>
         <p className="blank-underline-center margin-left center">{answer}</p>
@@ -180,7 +164,7 @@ class DelawareForm extends Component {
     return (
       <div key={i} className="margin-top margin-left">
         <label className="width-35 bold">
-          {this.getNumberSpan(i)}
+          {this.getNumberSpan(i, 12)}
           {question.input_label}
         </label>
         <div className="min-height-5 pad-left-lg">

@@ -1,12 +1,8 @@
 import React, { Fragment, Component } from "react";
 import { arrayOf, string, shape, number } from "prop-types";
 import classnames from "classnames";
-import moment from "moment";
-import { find, toString } from "lodash";
 
-// return empty string if no date
-moment.updateLocale(moment.locale(), { invalidDate: "" });
-const dateTimeFormat = "MM/D/YYYY h:mm A";
+import { find, toString } from "lodash";
 
 class ColoradoForm extends Component {
   static propTypes = {
@@ -20,7 +16,6 @@ class ColoradoForm extends Component {
           shape({
             id: number.isRequired,
             name: string.isRequired,
-            description: string,
           })
         ),
       })
@@ -54,7 +49,11 @@ class ColoradoForm extends Component {
     const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
     // correct for dashes and alpha numbering
-    const number = i === 16 ? 15 : i === 18 ? 16 : i + 1;
+    const numberMap = {
+      13: 1,
+      16: 2,
+      18: 3,
+    };
 
     return (
       <span className="space-right">
@@ -62,7 +61,7 @@ class ColoradoForm extends Component {
           ? "-"
           : alphaIndex > -1
           ? `${alphabet[alphaIndex]}.`
-          : `${number}.`}
+          : `${numberMap[i]}.`}
       </span>
     );
   };
@@ -95,9 +94,9 @@ class ColoradoForm extends Component {
 
     return (
       <Fragment>
-        <td>
+        <td className="width-25">
           <label>
-            {this.getNumberSpan(i)}
+            {/* relabel some questions */}
             {i === 1
               ? "Contractor/Developer"
               : i === 2
@@ -109,14 +108,8 @@ class ColoradoForm extends Component {
             :
           </label>
         </td>
-        <td>
-          <p>
-            {i === 5 || i === 9
-              ? moment(question.answer).format(dateTimeFormat)
-              : i === 6
-              ? this.getAnswerFromOptions(question)
-              : question.answer}
-          </p>
+        <td className="width-25">
+          <p>{question.answer}</p>
         </td>
       </Fragment>
     );
@@ -200,7 +193,7 @@ class ColoradoForm extends Component {
               {this.renderTableQuestion(0)}
               <td
                 colSpan="2"
-                className="bg-grey font-large bold center"
+                className="bg-grey font-large bold center width-50"
               >{`SWMP FIELD INSPECTION REPORT #${inspection.id}`}</td>
             </tr>
 
