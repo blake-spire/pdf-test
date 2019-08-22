@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Maryland from "./components/maryland";
+import Colorado from "./components/colorado";
 import * as serviceWorker from "./serviceWorker";
 
-import questions from "./data/maryland";
+import questions from "./data/colorado";
 
 ReactDOM.render(
-  <Maryland
+  <Colorado
     questions={questions}
     // imageBase64String={imageBase64String}
     // mock inspection data for now

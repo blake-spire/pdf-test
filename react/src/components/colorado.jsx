@@ -198,8 +198,6 @@ class ColoradoForm extends Component {
   render() {
     const { questions, inspection } = this.props;
 
-    console.log(questions);
-
     return (
       <Fragment>
         <section className="center">
